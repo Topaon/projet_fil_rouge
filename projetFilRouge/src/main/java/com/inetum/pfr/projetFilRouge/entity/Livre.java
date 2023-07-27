@@ -1,11 +1,19 @@
 package com.inetum.pfr.projetFilRouge.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,13 +42,12 @@ public class Livre {
 
 	// POUR GERER LA RELATION AVEC LES DOMAINES PLUS TARD
 
-//	@ManyToMany(fetch=FetchType.LAZY)
-//		@JoinTable(
-//			name = "",
-//			joinColumns = {@JoinColumn(name = "")},
-//			inverseJoinColumns = {@JoinColumn(name = "")})	
-//	private List<Domaine> domaines = new ArrayList <>();
-	
+	@ManyToMany(fetch=FetchType.LAZY)
+		@JoinTable(
+			name = "Livre_Domaine",
+			joinColumns = {@JoinColumn(name = "livreId")},
+			inverseJoinColumns = {@JoinColumn(name = "domaineId")})	
+	private List<Domaine> domaines = new ArrayList <>();
 	
 	
 	public Livre(Long id, String titre, String auteur, String editeur, Boolean dispo, EtatLivre etat) {

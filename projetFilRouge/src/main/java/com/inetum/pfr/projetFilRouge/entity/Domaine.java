@@ -1,9 +1,13 @@
 package com.inetum.pfr.projetFilRouge.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,8 +28,8 @@ public class Domaine {
 
 	// POUR GERER LA RELATION AVEC LES livres PLUS TARD
 
-//	@ManyToMany(fetch=FetchType.LAZY, mappedBy="domaines") 
-//	private List<Livre> livres;
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="domaines") 
+	private List<Livre> livres;
 	
 	
 	public Domaine(Long id, String nom, String description) {
