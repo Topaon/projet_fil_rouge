@@ -3,7 +3,9 @@ package com.inetum.pfr.projetFilRouge.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
+@Transactional
 public abstract class DaoGeneric<E, PK> implements IDaoGeneric<E, PK> {
 
 	private Class<E> entityClass; // à renseigner avec Entite.class dans le constructeur
