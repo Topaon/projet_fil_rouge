@@ -24,8 +24,4 @@ public class TestDaoLivre {
 		
 		assertTrue(daoLivre.findAll().size()== 2);
 	}
-	
-	
-	
-
 }
