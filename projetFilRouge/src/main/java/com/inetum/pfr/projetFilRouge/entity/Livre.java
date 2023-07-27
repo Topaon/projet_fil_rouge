@@ -40,11 +40,25 @@ public class Livre {
 //			joinColumns = {@JoinColumn(name = "")},
 //			inverseJoinColumns = {@JoinColumn(name = "")})	
 //	private List<Domaine> domaines = new ArrayList <>();
+	
+	
+	
+	public Livre(Long id, String titre, String auteur, String editeur, Boolean dispo, EtatLivre etat) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.auteur = auteur;
+		this.editeur = editeur;
+		this.dispo = dispo;
+		this.etat = etat;
+	}
+	
 
 	@Override
 	public String toString() {
 		return "Livre [id=" + id + ", titre=" + titre + ", auteur=" + auteur + ", editeur=" + editeur + ", dispo="
 				+ dispo + ", etat=" + etat + "]";
+	
 	}
 
 }

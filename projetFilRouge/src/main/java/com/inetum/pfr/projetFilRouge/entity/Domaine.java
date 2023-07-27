@@ -26,6 +26,15 @@ public class Domaine {
 
 //	@ManyToMany(fetch=FetchType.LAZY, mappedBy="domaines") 
 //	private List<Livre> livres;
+	
+	
+	public Domaine(Long id, String nom, String description) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.description = description;
+	}
+	
 
 	@Override
 	public String toString() {
