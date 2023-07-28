@@ -4,10 +4,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>Livre test</title>
-<script src="./js/livreAjax.js"></script>
+<script src="./js/personneAjax.js"></script>
 <script src="./js/my_ajax_util.js"></script>
 </head>
 <body>
 	<h1>Personne</h1>
+	<hr/>
+	<h2>Ajouter une personne</h2>
+		Nom : <input id="inputAddPersonName" />
+		Prenom : <input id="inputAddPersonSurname" />
+		Email : <input id="inputAddPersonEmail" />
+		Adresse : <input id="inputAddPersonAdresse" />
+		<button id="addButton">Ajouter</button>
+	<hr/>
+	<h2>Modifier une personne</h2>
+		Id de la personne à modifier : <input id="inputUpdateIdPersonToUpdate" />
+		Nom : <input id="inputUpdatePersonName" />
+		Prenom : <input id="inputUpdatePersonSurname" />
+		Email : <input id="inputUpdatePersonEmail" />
+		Adresse : <input id="inputUpdatePersonAdresse" />
+		<button id="updateButton">Modifier</button>
+	<hr/>
+	<h2>Supprimer une personne</h2>
+		Id de la personne à supprimer : <input id="inputDeletePersonById" />
+		<button id="deleteButton">Supprimer</button>
+	<hr/>
+	<h2>Liste des personnes</h2>
+		<table border="1">
+			<thead>
+				<tr><th>Id</th><th>Nom</th><th>Prenom</th><th>Email</th><th>Adresse</th></tr>
+			</thead>
+			<tbody id="tableBody">
+				
+			</tbody>
+		</table>
 </body>
 </html>
