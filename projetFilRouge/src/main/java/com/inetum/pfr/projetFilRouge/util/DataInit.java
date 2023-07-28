@@ -35,7 +35,7 @@ public class DataInit {
 	
 	@PostConstruct
 	public void initializeDb() {
-		daoLivre.insert(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
+		Livre livre1 = daoLivre.insert(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
 		daoLivre.insert(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
 		daoLivre.insert(new Livre (null, "titre3", "auteur3", "editeur3", true, EtatLivre.BON_ETAT));
 		daoLivre.insert(new Livre (null, "titre4", "auteur4", "editeur4", true, EtatLivre.BON_ETAT));
@@ -45,13 +45,18 @@ public class DataInit {
 		daoDomaine.insert(new Domaine(null, "Amour", "Ce livre parle d'amour"));
 		daoDomaine.insert(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
 		
-		daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
+		Personne personne1 = daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
 		daoPersonne.insert(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
 		daoPersonne.insert(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
 		
-		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+//		Emprunt emprunt1 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1));
 		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.RESERVATION));
 		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+		
+		personne1.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne1));
+		
+		
+		
 		
 		
 	}

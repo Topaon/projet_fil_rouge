@@ -8,6 +8,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -35,12 +37,14 @@ public class Emprunt {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-//	@ManyToOne
-//	@JoinColumn(name = "PersonneId")
-//	private Personne personne;
+	@ManyToOne
+	@JoinColumn(name = "personneId")
+	private Personne personne;
 	
-//	@OneToMany(fetch=FetchType.LAZY,mappedBy="emprunt") 
-//	private Livre livre;
+	@ManyToOne
+	@JoinColumn(name = "livreId")
+	private Livre livre;
+
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut = new Date();
@@ -50,12 +54,20 @@ public class Emprunt {
 	@Enumerated(EnumType.STRING)
 	private TypeEmprunt type;
 
+	public Emprunt(Long id, TypeEmprunt type, Livre livre, Personne personne) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.livre = livre;
+		this.personne = personne;
+	}
+	
 	public Emprunt(Long id, TypeEmprunt type) {
 		super();
 		this.id = id;
 		this.type = type;
-		
 	}
+	
 
 	@Override
 	public String toString() {

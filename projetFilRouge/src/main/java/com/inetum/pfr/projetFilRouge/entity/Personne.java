@@ -1,9 +1,13 @@
 package com.inetum.pfr.projetFilRouge.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +23,9 @@ public class Personne {
 	private String prenom;
 	private String email;
 	private String adresse;
-	// Clé étrangère List<Emprunt> vers emprunt à rajouter plus tard
+	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="personne")
+	private List<Emprunt> emprunts;
 	
 	// Constructeur
 	public Personne(Long id, String nom, String prenom, String email, String adresse) {
