@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+//@NamedQuery(name = "Livre.findLivresOfDomain", query = "SELECT l FROM Livre l LEFT JOIN FETCH l.domaines d WHERE d.id = ?1")
+@NamedQuery(name = "Livre.findWithDomainById", query = "SELECT l FROM Livre l LEFT JOIN FETCH l.domaines d WHERE l.id = ?1")
+
 public class Livre {
 
 	public enum EtatLivre {

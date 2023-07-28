@@ -50,9 +50,10 @@ public class TestDaoLivre {
 		daoLivre.update(livre2);
 		daoLivre.update(livre3);
 		
-		logger.trace("test update:" + daoLivre.findById(livre1.getId()).getDomaines().size());
-//		assertTrue(daoLivre.findById(livre1.getId()).getDomaines().size() == 2);
-	
+		logger.trace("test update:" + daoLivre.findWithDomainById(livre1.getId()).getDomaines().size());
+		logger.trace("test update:" + daoLivre.findWithDomainById(livre1.getId()).getDomaines().get(0).toString());
+		assertTrue(daoLivre.findWithDomainById(livre1.getId()).getDomaines().size() == 2);
 		
+
 	}
 }

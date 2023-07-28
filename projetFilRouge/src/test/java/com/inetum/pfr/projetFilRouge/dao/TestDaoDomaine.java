@@ -29,10 +29,12 @@ public class TestDaoDomaine {
 	public void testQueries() {
 		
 		Domaine domaine1 = daoDomaine.insert(new Domaine(null, "Domaine test", "Domaine créé pour le test junit"));
+		Domaine domaine2 = daoDomaine.insert(new Domaine(null, "Domaine siences", "Domaine créé pour le test sciences"));
+		Domaine domaine3 = daoDomaine.insert(new Domaine(null, "Domaine histoire", "Domaine créé pour le test histoire"));
 		
 		assertEquals(daoDomaine.findById(domaine1.getId()).getDescription(), "Domaine créé pour le test junit");
 		
-		assertTrue(daoDomaine.findAll().size() == 4);
+		assertTrue(daoDomaine.findAll().size() == 3);
 		
 		domaine1.setDescription("Nouvelle description après mise à jour");
 		daoDomaine.update(domaine1);
