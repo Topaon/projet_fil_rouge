@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
+import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
+import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.entity.Livre.EtatLivre;
 
 @Component
@@ -22,6 +24,9 @@ public class DataInit {
 	@Autowired
 	DaoDomaine daoDomaine;
 	
+	@Autowired
+	DaoPersonne daoPersonne;
+	
 	@PostConstruct
 	public void initializeDb() {
 		daoLivre.insert(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
@@ -33,5 +38,10 @@ public class DataInit {
 		daoDomaine.insert(new Domaine(null, "Aventure", "Ce livre parle d'aventure"));
 		daoDomaine.insert(new Domaine(null, "Amour", "Ce livre parle d'amour"));
 		daoDomaine.insert(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
+		
+		daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
+		daoPersonne.insert(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
+		daoPersonne.insert(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
+		
 	}
 }
