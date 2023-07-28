@@ -65,7 +65,7 @@ public class LivreRestCtrl {
 	// "Flamamrion", "dispo": true; "etat": "MAUVAIS_ETAT"}
 
 	@PutMapping
-	public ResponseEntity<?> putCompte(@RequestBody Livre livre) {
+	public ResponseEntity<?> putLivre(@RequestBody Livre livre) {
 		Long idLivreRecherche = livre.getId();
 		Livre livreRecherche = daoLivre.findById(idLivreRecherche);
 
@@ -83,7 +83,7 @@ public class LivreRestCtrl {
 	// appelée en DELETE
 
 	@DeleteMapping("/{livreId}")
-	public ResponseEntity<?> deleteCompteById(@PathVariable("livreId") Long id) {
+	public ResponseEntity<?> deleteLivreById(@PathVariable("livreId") Long id) {
 		Livre livreRecherche = daoLivre.findById(id);
 		if (livreRecherche != null) {
 			daoLivre.deleteById(id);
