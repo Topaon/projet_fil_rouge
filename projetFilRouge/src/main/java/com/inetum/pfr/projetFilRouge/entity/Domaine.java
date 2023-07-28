@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@NamedQuery(name = "Domaine.findDomaineWithLivresById", query = "SELECT d FROM Domaine d LEFT JOIN FETCH d.livres l WHERE d.id = ?1")
+
 public class Domaine {
 
 	@Id

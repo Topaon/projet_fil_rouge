@@ -24,5 +24,13 @@ public class DaoDomaine extends DaoGeneric<Domaine, Long> implements IDaoDomaine
 		return entityManager;
 	}
 	
+	@Override
+	public Domaine findDomaineWithLivresById(Long id) {
+		return entityManager
+				.createNamedQuery("Domaine.findDomaineWithLivresById", Domaine.class )
+				.setParameter(1, id)
+				.getSingleResult();
+	}
+	
 	
 }
