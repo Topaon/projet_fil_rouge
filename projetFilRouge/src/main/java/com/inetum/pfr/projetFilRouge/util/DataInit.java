@@ -3,6 +3,7 @@ package com.inetum.pfr.projetFilRouge.util;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
@@ -12,6 +13,7 @@ import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Livre.EtatLivre;
 
 @Component
+@Profile("init")
 public class DataInit {
 
 	@Autowired

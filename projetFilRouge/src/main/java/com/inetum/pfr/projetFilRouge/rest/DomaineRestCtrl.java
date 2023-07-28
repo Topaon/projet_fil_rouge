@@ -46,7 +46,7 @@ public class DomaineRestCtrl {
 			return new ResponseEntity<String>("Le compte à modifier n'a pas été trouvé", HttpStatus.NOT_FOUND);
 		} else {
 			daoDomaine.update(domaine);
-			return new ResponseEntity<Domaine>(domaine, HttpStatus.ACCEPTED);
+			return new ResponseEntity<String>("Modification effectuée", HttpStatus.ACCEPTED);
 		}
 	}
 }
