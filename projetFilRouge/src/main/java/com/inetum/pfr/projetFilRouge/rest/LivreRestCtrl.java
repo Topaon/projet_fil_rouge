@@ -48,7 +48,7 @@ public class LivreRestCtrl {
 
 	// CREATE
 	// exemple d'URL: ./api-bibliotheque/livre
-	// appelée en POST/
+	// appelée en POST:
 	// {"id" : null , "titre: "Les roses" , "auteur": "Didier", "editeur":
 	// "Flamamrion", "dispo": true; "etat": "BON_ETAT"}
 

@@ -39,7 +39,8 @@ public class TestDaoLivre {
 		Domaine histoire = daoDomaine.insert(new Domaine(null, "Histoire", "Domaine de l'histoire"));
 		Domaine informatique = daoDomaine.insert(new Domaine(null, "Informatique", "Domaine de l'informatique"));
 		
-		
+		assertTrue(daoDomaine.findAll().size()== 4);
+
 		livre1.getDomaines().add(sciences);
 		livre1.getDomaines().add(histoire);
 		livre2.getDomaines().add(histoire);
@@ -47,7 +48,10 @@ public class TestDaoLivre {
 		
 		daoLivre.update(livre1); 
 		daoLivre.update(livre2);
-		daoLivre.update(livre3); 
+		daoLivre.update(livre3);
+		
+		logger.trace("test update:" + daoLivre.findById(livre1.getId()).getDomaines().size());
+//		assertTrue(daoLivre.findById(livre1.getId()).getDomaines().size() == 2);
 	
 		
 	}

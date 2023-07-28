@@ -15,7 +15,7 @@ public class DataInit {
 	@Autowired
 	DaoLivre daoLivre;
 	
-	@PostConstruct
+//	@PostConstruct
 	public void initializeDb() {
 		daoLivre.insert(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
 		daoLivre.insert(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
