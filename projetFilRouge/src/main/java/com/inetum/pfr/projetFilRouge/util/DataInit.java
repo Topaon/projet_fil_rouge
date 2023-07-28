@@ -7,9 +7,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
+import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
+import com.inetum.pfr.projetFilRouge.entity.Emprunt;
+import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.entity.Livre.EtatLivre;
@@ -24,6 +27,9 @@ public class DataInit {
 	@Autowired
 	DaoDomaine daoDomaine;
 	
+	@Autowired
+	DaoEmprunt daoEmprunt;
+
 	@Autowired
 	DaoPersonne daoPersonne;
 	
@@ -42,6 +48,11 @@ public class DataInit {
 		daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
 		daoPersonne.insert(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
 		daoPersonne.insert(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
+		
+		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.RESERVATION));
+		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+		
 		
 	}
 }

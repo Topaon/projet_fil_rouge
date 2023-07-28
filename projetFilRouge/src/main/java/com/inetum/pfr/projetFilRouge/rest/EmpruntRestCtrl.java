@@ -20,7 +20,7 @@ import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 
 @RestController
 @RequestMapping(value = "/api-bibliotheque/emprunt", headers = "Accept=application/json")
-public class EmprunRestCtrl {
+public class EmpruntRestCtrl {
 	
 	@Autowired
 	DaoEmprunt daoEmprunt;
@@ -85,7 +85,7 @@ public class EmprunRestCtrl {
 	// exemple d'URL: ./api-bibliotheque/emprunt/1
 	// appelée en DELETE
 	
-	@DeleteMapping("/{emprunId}")
+	@DeleteMapping("/{empruntId}")
 	public ResponseEntity<?> deleteempruntById(@PathVariable("empruntId") Long id) {
 		Emprunt empruntRecherche = daoEmprunt.findById(id);
 		if (empruntRecherche != null) {
