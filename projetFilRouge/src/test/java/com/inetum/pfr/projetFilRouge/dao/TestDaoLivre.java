@@ -52,7 +52,5 @@ public class TestDaoLivre {
 		
 		logger.trace("test update:" + daoLivre.findById(livre1.getId()).getDomaines().size());
 //		assertTrue(daoLivre.findById(livre1.getId()).getDomaines().size() == 2);
-	
-		
 	}
 }
