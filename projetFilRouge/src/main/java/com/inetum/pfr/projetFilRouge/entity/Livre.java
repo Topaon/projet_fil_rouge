@@ -67,5 +67,4 @@ public class Livre {
 				+ dispo + ", etat=" + etat + "]";
 	
 	}
-
 }
