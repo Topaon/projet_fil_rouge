@@ -14,22 +14,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
+import com.inetum.pfr.projetFilRouge.services.ServiceLivre;
 
 @RestController
 @RequestMapping(value = "/api-bibliotheque/livre", headers = "Accept=application/json")
 public class LivreRestCtrl {
 
 	@Autowired
-	DaoLivre daoLivre;
+	ServiceLivre serviceLivre;
 
 	// READ
 	// URL: ./api-bibliotheque/livre
 
 	@GetMapping("")
 	public List<Livre> getAllLivres() {
-		return daoLivre.findAll();
+		return serviceLivre.searchAll();
 	}
 
 	// exemple d'URL: ./api-bibliotheque/livre/1
@@ -37,7 +37,7 @@ public class LivreRestCtrl {
 
 	@GetMapping("/{livreId}")
 	public ResponseEntity<Livre> getLivreById(@PathVariable("livreId") Long id) {
-		Livre livre = daoLivre.findById(id).orElse(null);
+		Livre livre = serviceLivre.searchById(id);
 
 		if (livre != null) {
 			return new ResponseEntity<Livre>(livre, HttpStatus.OK);
@@ -54,7 +54,7 @@ public class LivreRestCtrl {
 
 	@PostMapping
 	public Livre postLivre(@RequestBody Livre nouveauLivre) {
-		Livre livreStocke = daoLivre.save(nouveauLivre);
+		Livre livreStocke = serviceLivre.saveOrUpdate(nouveauLivre);
 		return livreStocke;
 	}
 
@@ -67,26 +67,26 @@ public class LivreRestCtrl {
 	@PutMapping
 	public ResponseEntity<?> putLivre(@RequestBody Livre livre) {
 		Long idLivreRecherche = livre.getId();
-		Livre livreRecherche = daoLivre.findById(idLivreRecherche).orElse(null);
+		Livre livreRecherche = serviceLivre.searchById(idLivreRecherche);
 
 		if (livreRecherche == null) {
 			return new ResponseEntity<String>("{\"err\" : \"livre non trouvé\"}", HttpStatus.NOT_FOUND);
 		} else {
-			daoLivre.save(livre);
+			serviceLivre.saveOrUpdate(livre);
 			return new ResponseEntity<Livre>(livre, HttpStatus.OK);
 		}
 
 	}
 
-	// DELETE
+	// remove
 	// exemple d'URL: ./api-bibliotheque/livre/1
-	// appelée en DELETE
+	// appelée en remove
 
 	@DeleteMapping("/{livreId}")
-	public ResponseEntity<?> deleteCompteById(@PathVariable("livreId") Long id) {
-		Livre livreRecherche = daoLivre.findById(id).orElse(null);
+	public ResponseEntity<?> removeCompteById(@PathVariable("livreId") Long id) {
+		Livre livreRecherche = serviceLivre.searchById(id);
 		if (livreRecherche != null) {
-			daoLivre.deleteById(id);
+			serviceLivre.removeById(id);
 			return new ResponseEntity<String>("{ \"done\" : \"livre supprimé\"}", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>("{ \"err\" : \"livre non trouvé\"}", HttpStatus.NOT_FOUND);
