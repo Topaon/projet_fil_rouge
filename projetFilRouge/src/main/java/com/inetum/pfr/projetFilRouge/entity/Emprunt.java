@@ -53,6 +53,9 @@ public class Emprunt {
 	
 	@Enumerated(EnumType.STRING)
 	private TypeEmprunt type;
+	
+	private boolean enCours;
+	
 
 	public Emprunt(Long id, TypeEmprunt type, Livre livre, Personne personne) {
 		super();
@@ -60,14 +63,10 @@ public class Emprunt {
 		this.type = type;
 		this.livre = livre;
 		this.personne = personne;
+		this.enCours = true;
 	}
 	
-	public Emprunt(Long id, TypeEmprunt type) {
-		super();
-		this.id = id;
-		this.type = type;
-	}
-	
+
 
 	@Override
 	public String toString() {
