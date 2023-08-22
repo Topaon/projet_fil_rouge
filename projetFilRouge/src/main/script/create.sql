@@ -1,0 +1,18 @@
+create table domaine (id number(19,0) generated as identity, description varchar2(255 char), nom varchar2(255 char), primary key (id));
+create table emprunt (id number(19,0) generated as identity, date_debut date, date_fin date, type varchar2(255 char), livre_id number(19,0), personne_id number(19,0), primary key (id));
+create table livre (id number(19,0) generated as identity, auteur varchar2(255 char), dispo number(1,0), editeur varchar2(255 char), etat varchar2(255 char), titre varchar2(255 char), primary key (id));
+create table livre_domaine (livre_id number(19,0) not null, domaine_id number(19,0) not null);
+create table personne (id number(19,0) generated as identity, adresse varchar2(255 char), email varchar2(255 char), nom varchar2(255 char), prenom varchar2(255 char), primary key (id));
+alter table emprunt add constraint FKjnn7ll8vl64xhmb6779svt7c foreign key (livre_id) references livre;
+alter table emprunt add constraint FKps0seu1xs2x4gbihnwjjfcpl5 foreign key (personne_id) references personne;
+alter table livre_domaine add constraint FKiff23bulndsloc5thtdworda2 foreign key (domaine_id) references domaine;
+alter table livre_domaine add constraint FKe5ovo6cx9gbwv3wngrn3kecw4 foreign key (livre_id) references livre;
+create table domaine (id number(19,0) generated as identity, description varchar2(255 char), nom varchar2(255 char), primary key (id));
+create table emprunt (id number(19,0) generated as identity, date_debut date, date_fin date, type varchar2(255 char), livre_id number(19,0), personne_id number(19,0), primary key (id));
+create table livre (id number(19,0) generated as identity, auteur varchar2(255 char), dispo number(1,0), editeur varchar2(255 char), etat varchar2(255 char), titre varchar2(255 char), primary key (id));
+create table livre_domaine (livre_id number(19,0) not null, domaine_id number(19,0) not null);
+create table personne (id number(19,0) generated as identity, adresse varchar2(255 char), email varchar2(255 char), nom varchar2(255 char), prenom varchar2(255 char), primary key (id));
+alter table emprunt add constraint FKjnn7ll8vl64xhmb6779svt7c foreign key (livre_id) references livre;
+alter table emprunt add constraint FKps0seu1xs2x4gbihnwjjfcpl5 foreign key (personne_id) references personne;
+alter table livre_domaine add constraint FKiff23bulndsloc5thtdworda2 foreign key (domaine_id) references domaine;
+alter table livre_domaine add constraint FKe5ovo6cx9gbwv3wngrn3kecw4 foreign key (livre_id) references livre;
