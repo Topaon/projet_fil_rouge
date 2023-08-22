@@ -13,39 +13,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
+import com.inetum.pfr.projetFilRouge.services.ServiceDomaine;
 
 @RestController
 @RequestMapping(value = "/api-bibliotheque/domaine", headers="Accept=application/json")
 public class DomaineRestCtrl {
 
 	@Autowired
-	DaoDomaine daoDomaine;
+	ServiceDomaine serviceDomaine;
 	
 	@GetMapping("")
 	public List<Domaine> getAllDomaines() {
-		return daoDomaine.findAll();
+		return serviceDomaine.searchAll();
 	}
 	
 	@GetMapping("/{id}")
 	public Domaine getDomaineById(@PathVariable("id") Long id ) {
-		return daoDomaine.findById(id).orElse(null);
+		return serviceDomaine.searchById(id);
 	}
 	
 	@PostMapping("")
 	public Domaine addDomaine(@RequestBody Domaine domaine) {
-		return daoDomaine.save(domaine);
+		return serviceDomaine.saveOrUpdate(domaine);
 	}
 		
 	@PutMapping("")
 	public ResponseEntity<?> updateDomaine(@RequestBody Domaine domaine) {
 		Long idCompteAModifier = domaine.getId();
 		
-		if(daoDomaine.findById(idCompteAModifier) == null) {
+		if(serviceDomaine.searchById(idCompteAModifier) == null) {
 			return new ResponseEntity<String>("Le compte à modifier n'a pas été trouvé", HttpStatus.NOT_FOUND);
 		} else {
-			daoDomaine.save(domaine);
+			serviceDomaine.saveOrUpdate(domaine);
 			return new ResponseEntity<String>("Modification effectuée", HttpStatus.ACCEPTED);
 		}
 	}
