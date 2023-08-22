@@ -37,7 +37,7 @@ public class LivreRestCtrl {
 
 	@GetMapping("/{livreId}")
 	public ResponseEntity<Livre> getLivreById(@PathVariable("livreId") Long id) {
-		Livre livre = daoLivre.findById(id);
+		Livre livre = daoLivre.findById(id).orElse(null);
 
 		if (livre != null) {
 			return new ResponseEntity<Livre>(livre, HttpStatus.OK);
@@ -54,7 +54,7 @@ public class LivreRestCtrl {
 
 	@PostMapping
 	public Livre postLivre(@RequestBody Livre nouveauLivre) {
-		Livre livreStocke = daoLivre.insert(nouveauLivre);
+		Livre livreStocke = daoLivre.save(nouveauLivre);
 		return livreStocke;
 	}
 
@@ -67,12 +67,12 @@ public class LivreRestCtrl {
 	@PutMapping
 	public ResponseEntity<?> putLivre(@RequestBody Livre livre) {
 		Long idLivreRecherche = livre.getId();
-		Livre livreRecherche = daoLivre.findById(idLivreRecherche);
+		Livre livreRecherche = daoLivre.findById(idLivreRecherche).orElse(null);
 
 		if (livreRecherche == null) {
 			return new ResponseEntity<String>("{\"err\" : \"livre non trouvé\"}", HttpStatus.NOT_FOUND);
 		} else {
-			daoLivre.update(livre);
+			daoLivre.save(livre);
 			return new ResponseEntity<Livre>(livre, HttpStatus.OK);
 		}
 
@@ -83,8 +83,8 @@ public class LivreRestCtrl {
 	// appelée en DELETE
 
 	@DeleteMapping("/{livreId}")
-	public ResponseEntity<?> deleteLivreById(@PathVariable("livreId") Long id) {
-		Livre livreRecherche = daoLivre.findById(id);
+	public ResponseEntity<?> deleteCompteById(@PathVariable("livreId") Long id) {
+		Livre livreRecherche = daoLivre.findById(id).orElse(null);
 		if (livreRecherche != null) {
 			daoLivre.deleteById(id);
 			return new ResponseEntity<String>("{ \"done\" : \"livre supprimé\"}", HttpStatus.OK);

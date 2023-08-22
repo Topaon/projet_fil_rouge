@@ -35,15 +35,15 @@ public class DataInit {
 	
 	@PostConstruct
 	public void initializeDb() {
-		Livre livre1 = daoLivre.insert(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre3", "auteur3", "editeur3", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre4", "auteur4", "editeur4", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre5", "auteur5", "editeur5", true, EtatLivre.BON_ETAT));
+		Livre livre1 = daoLivre.save(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre3", "auteur3", "editeur3", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre4", "auteur4", "editeur4", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre5", "auteur5", "editeur5", true, EtatLivre.BON_ETAT));
 		
-		daoDomaine.insert(new Domaine(null, "Aventure", "Ce livre parle d'aventure"));
-		daoDomaine.insert(new Domaine(null, "Amour", "Ce livre parle d'amour"));
-		daoDomaine.insert(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
+		daoDomaine.save(new Domaine(null, "Aventure", "Ce livre parle d'aventure"));
+		daoDomaine.save(new Domaine(null, "Amour", "Ce livre parle d'amour"));
+		daoDomaine.save(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
 		
 		Personne personne1 = daoPersonne.save(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
 		daoPersonne.save(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
