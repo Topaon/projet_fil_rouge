@@ -32,7 +32,7 @@ public class TestDaoDomaine {
 		
 		assertEquals(daoDomaine.findById(domaine1.getId()).orElse(null).getDescription(), "Domaine créé pour le test junit");
 		
-		assertTrue(daoDomaine.findAll().size() == 3);
+		assertTrue(daoDomaine.findAll().size() == 7);
 		
 		domaine1.setDescription("Nouvelle description après mise à jour");
 		daoDomaine.save(domaine1);
