@@ -1,5 +1,6 @@
 package com.inetum.pfr.projetFilRouge.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -25,7 +26,7 @@ public class Personne {
 	private String adresse;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="personne")
-	private List<Emprunt> emprunts;
+	private List<Emprunt> emprunts = new ArrayList<>();
 	
 	// Constructeur
 	public Personne(Long id, String nom, String prenom, String email, String adresse) {

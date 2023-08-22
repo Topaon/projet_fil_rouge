@@ -55,9 +55,6 @@ public class DataInit {
 		
 		personne1.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne1));
 		
-		
-		
-		
-		
+
 	}
 }
