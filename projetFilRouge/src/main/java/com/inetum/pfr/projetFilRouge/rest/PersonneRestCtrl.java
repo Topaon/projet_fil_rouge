@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
+import com.inetum.pfr.projetFilRouge.services.ServicePersonne;
 
 @RestController
 @RequestMapping(value = "/api-bibliotheque/personne", headers = "Accept=application/json")
@@ -23,13 +24,16 @@ public class PersonneRestCtrl {
 
 	@Autowired
 	DaoPersonne daoPersonne;
+	
+	@Autowired
+	ServicePersonne servicePersonne;
 
 	// READ
 	// URL: ./api-bibliotheque/Personne
 
 	@GetMapping("")
 	public List<Personne> getAllPersonnes() {
-		return daoPersonne.findAll();
+		return servicePersonne.searchAll();
 	}
 
 	// exemple d'URL: ./api-bibliotheque/personne/1
@@ -37,7 +41,7 @@ public class PersonneRestCtrl {
 
 	@GetMapping("/{PersonneId}")
 	public ResponseEntity<?> getPersonneById(@PathVariable("PersonneId") Long id) {
-		Personne Personne = daoPersonne.findById(id).orElse(null);
+		Personne Personne = servicePersonne.searchById(id);
 
 		if (Personne != null) {
 			return new ResponseEntity<Personne>(Personne, HttpStatus.OK);
@@ -54,7 +58,7 @@ public class PersonneRestCtrl {
 
 	@PostMapping("")
 	public Personne postPersonne(@RequestBody Personne nouveauPersonne) {
-		Personne PersonneStocke = daoPersonne.save(nouveauPersonne);
+		Personne PersonneStocke = servicePersonne.saveOrUpdate(nouveauPersonne);
 		return PersonneStocke;
 	}
 
@@ -65,15 +69,15 @@ public class PersonneRestCtrl {
 	// "michel.dupont@sfr.fr", "adresse": "Lyon"}
 
 	@PutMapping
-	public ResponseEntity<?> putCompte(@RequestBody Personne Personne) {
-		Long idPersonneRecherche = Personne.getId();
-		Personne PersonneRecherche = daoPersonne.findById(idPersonneRecherche).orElse(null);
+	public ResponseEntity<?> putCompte(@RequestBody Personne personne) {
+		Long idPersonneRecherche = personne.getId();
+		Personne PersonneRecherche = servicePersonne.searchById(idPersonneRecherche);
 
 		if (PersonneRecherche == null) {
 			return new ResponseEntity<String>("{\"err\" : \"Personne non trouvé\"}", HttpStatus.NOT_FOUND);
 		} else {
-			daoPersonne.save(Personne);
-			return new ResponseEntity<Personne>(Personne, HttpStatus.OK);
+			servicePersonne.saveOrUpdate(personne);
+			return new ResponseEntity<Personne>(personne, HttpStatus.OK);
 		}
 
 	}
@@ -84,9 +88,9 @@ public class PersonneRestCtrl {
 
 	@DeleteMapping("/{PersonneId}")
 	public ResponseEntity<?> deleteCompteById(@PathVariable("PersonneId") Long id) {
-		Personne PersonneRecherche = daoPersonne.findById(id).orElse(null);
+		Personne PersonneRecherche = servicePersonne.searchById(id);
 		if (PersonneRecherche != null) {
-			daoPersonne.deleteById(id);
+			servicePersonne.removeById(id);
 			return new ResponseEntity<String>("{ \"done\" : \"Personne supprimé\"}", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<String>("{ \"err\" : \"Personne non trouvé\"}", HttpStatus.NOT_FOUND);
