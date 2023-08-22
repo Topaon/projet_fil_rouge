@@ -8,8 +8,5 @@ import com.inetum.pfr.projetFilRouge.entity.Livre;
 
 // Hérite toutes ses méthodes de IDaoGeneric
 public interface DaoLivre extends JpaRepository<Livre, Long>{
-	
-	public List<Livre> findLivresOfDomain(Long id);
-	public Livre findWithDomainById(Long id);
-	
+
 }
