@@ -37,7 +37,7 @@ public class PersonneRestCtrl {
 
 	@GetMapping("/{PersonneId}")
 	public ResponseEntity<?> getPersonneById(@PathVariable("PersonneId") Long id) {
-		Personne Personne = daoPersonne.findById(id);
+		Personne Personne = daoPersonne.findById(id).orElse(null);
 
 		if (Personne != null) {
 			return new ResponseEntity<Personne>(Personne, HttpStatus.OK);
@@ -54,7 +54,7 @@ public class PersonneRestCtrl {
 
 	@PostMapping("")
 	public Personne postPersonne(@RequestBody Personne nouveauPersonne) {
-		Personne PersonneStocke = daoPersonne.insert(nouveauPersonne);
+		Personne PersonneStocke = daoPersonne.save(nouveauPersonne);
 		return PersonneStocke;
 	}
 
@@ -67,12 +67,12 @@ public class PersonneRestCtrl {
 	@PutMapping
 	public ResponseEntity<?> putCompte(@RequestBody Personne Personne) {
 		Long idPersonneRecherche = Personne.getId();
-		Personne PersonneRecherche = daoPersonne.findById(idPersonneRecherche);
+		Personne PersonneRecherche = daoPersonne.findById(idPersonneRecherche).orElse(null);
 
 		if (PersonneRecherche == null) {
 			return new ResponseEntity<String>("{\"err\" : \"Personne non trouvé\"}", HttpStatus.NOT_FOUND);
 		} else {
-			daoPersonne.update(Personne);
+			daoPersonne.save(Personne);
 			return new ResponseEntity<Personne>(Personne, HttpStatus.OK);
 		}
 
@@ -84,7 +84,7 @@ public class PersonneRestCtrl {
 
 	@DeleteMapping("/{PersonneId}")
 	public ResponseEntity<?> deleteCompteById(@PathVariable("PersonneId") Long id) {
-		Personne PersonneRecherche = daoPersonne.findById(id);
+		Personne PersonneRecherche = daoPersonne.findById(id).orElse(null);
 		if (PersonneRecherche != null) {
 			daoPersonne.deleteById(id);
 			return new ResponseEntity<String>("{ \"done\" : \"Personne supprimé\"}", HttpStatus.OK);

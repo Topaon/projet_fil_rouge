@@ -45,13 +45,13 @@ public class DataInit {
 		daoDomaine.insert(new Domaine(null, "Amour", "Ce livre parle d'amour"));
 		daoDomaine.insert(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
 		
-		Personne personne1 = daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
-		daoPersonne.insert(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
-		daoPersonne.insert(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
+		Personne personne1 = daoPersonne.save(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
+		daoPersonne.save(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
+		daoPersonne.save(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
 		
 //		Emprunt emprunt1 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1));
-		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.RESERVATION));
-		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+		daoEmprunt.save(new Emprunt(null, TypeEmprunt.RESERVATION));
+		daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF));
 		
 		personne1.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne1));
 		

@@ -1,23 +1,9 @@
 package com.inetum.pfr.projetFilRouge.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 
-@Repository
-public class DaoPersonne extends DaoGeneric<Personne, Long> implements IDaoPersonne {
-	@PersistenceContext
-	EntityManager entityManager;
-	
-	public DaoPersonne() {
-		super(Personne.class);
-	}
+public interface DaoPersonne extends JpaRepository<Personne, Long> {
 
-	@Override
-	public EntityManager getEntityManager() {
-		return entityManager;
-	}
 }

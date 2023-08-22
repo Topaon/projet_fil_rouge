@@ -25,9 +25,9 @@ public class TestDaoEmprunt {
 	public void testQueries() {
 
 	
-	Emprunt emprunt1 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
-	Emprunt emprunt2 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.RESERVATION));
-	Emprunt emprunt3 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+	Emprunt emprunt1 = daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF));
+	Emprunt emprunt2 = daoEmprunt.save(new Emprunt(null, TypeEmprunt.RESERVATION));
+	Emprunt emprunt3 = daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF));
 	
 	assertTrue(daoEmprunt.findAll().size()== 3);
 	

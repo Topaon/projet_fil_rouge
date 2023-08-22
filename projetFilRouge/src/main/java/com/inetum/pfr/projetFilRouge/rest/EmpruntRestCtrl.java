@@ -40,7 +40,7 @@ public class EmpruntRestCtrl {
 	
 	@GetMapping("/{empruntId}")
 	public ResponseEntity<Emprunt> getEmpruntById(@PathVariable("empruntId") Long id) {
-		Emprunt emprunt = daoEmprunt.findById(id);
+		Emprunt emprunt = daoEmprunt.findById(id).orElse(null);
 
 		if (emprunt != null) {
 			return new ResponseEntity<Emprunt>(emprunt, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class EmpruntRestCtrl {
 	
 	@PostMapping
 	public Emprunt postEmprunt(@RequestBody Emprunt nouvelEmprunt) {
-		Emprunt EmpruntStocke = daoEmprunt.insert(nouvelEmprunt);
+		Emprunt EmpruntStocke = daoEmprunt.save(nouvelEmprunt);
 		return EmpruntStocke;
 	}
 	
@@ -70,12 +70,12 @@ public class EmpruntRestCtrl {
 	@PutMapping
 	public ResponseEntity<?> putEmprunt(@RequestBody Emprunt Emprunt) {
 		Long idEmpruntRecherche = Emprunt.getId();
-		Emprunt EmpruntRecherche = daoEmprunt.findById(idEmpruntRecherche);
+		Emprunt EmpruntRecherche = daoEmprunt.findById(idEmpruntRecherche).orElse(null);
 
 		if (EmpruntRecherche == null) {
 			return new ResponseEntity<String>("{\"err\" : \"Emprunt non trouvé\"}", HttpStatus.NOT_FOUND);
 		} else {
-			daoEmprunt.update(Emprunt);
+			daoEmprunt.save(Emprunt);
 			return new ResponseEntity<Emprunt>(Emprunt, HttpStatus.OK);
 		}
 
@@ -87,7 +87,7 @@ public class EmpruntRestCtrl {
 	
 	@DeleteMapping("/{empruntId}")
 	public ResponseEntity<?> deleteempruntById(@PathVariable("empruntId") Long id) {
-		Emprunt empruntRecherche = daoEmprunt.findById(id);
+		Emprunt empruntRecherche = daoEmprunt.findById(id).orElse(null);
 		if (empruntRecherche != null) {
 			daoEmprunt.deleteById(id);
 			return new ResponseEntity<String>("{ \"done\" : \"emprunt supprimé\"}", HttpStatus.OK);
