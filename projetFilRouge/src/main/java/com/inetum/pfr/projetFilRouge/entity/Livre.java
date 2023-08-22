@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -53,6 +54,8 @@ public class Livre {
 			inverseJoinColumns = {@JoinColumn(name = "domaineId")})	
 	private List<Domaine> domaines = new ArrayList <>();
 	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="livre")
+	private List<Emprunt> emprunts;
 	
 	public Livre(Long id, String titre, String auteur, String editeur, Boolean dispo, EtatLivre etat) {
 		super();

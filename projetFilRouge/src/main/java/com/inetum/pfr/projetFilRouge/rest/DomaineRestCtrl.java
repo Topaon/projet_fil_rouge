@@ -30,12 +30,12 @@ public class DomaineRestCtrl {
 	
 	@GetMapping("/{id}")
 	public Domaine getDomaineById(@PathVariable("id") Long id ) {
-		return daoDomaine.findById(id);
+		return daoDomaine.findById(id).orElse(null);
 	}
 	
 	@PostMapping("")
 	public Domaine addDomaine(@RequestBody Domaine domaine) {
-		return daoDomaine.insert(domaine);
+		return daoDomaine.save(domaine);
 	}
 		
 	@PutMapping("")
@@ -45,7 +45,7 @@ public class DomaineRestCtrl {
 		if(daoDomaine.findById(idCompteAModifier) == null) {
 			return new ResponseEntity<String>("Le compte à modifier n'a pas été trouvé", HttpStatus.NOT_FOUND);
 		} else {
-			daoDomaine.update(domaine);
+			daoDomaine.save(domaine);
 			return new ResponseEntity<String>("Modification effectuée", HttpStatus.ACCEPTED);
 		}
 	}

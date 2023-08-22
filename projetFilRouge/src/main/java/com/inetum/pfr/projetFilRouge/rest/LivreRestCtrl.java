@@ -65,7 +65,7 @@ public class LivreRestCtrl {
 	// "Flamamrion", "dispo": true; "etat": "MAUVAIS_ETAT"}
 
 	@PutMapping
-	public ResponseEntity<?> putCompte(@RequestBody Livre livre) {
+	public ResponseEntity<?> putLivre(@RequestBody Livre livre) {
 		Long idLivreRecherche = livre.getId();
 		Livre livreRecherche = daoLivre.findById(idLivreRecherche).orElse(null);
 

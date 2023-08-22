@@ -7,9 +7,12 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
+import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
+import com.inetum.pfr.projetFilRouge.entity.Emprunt;
+import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.entity.Livre.EtatLivre;
@@ -25,23 +28,33 @@ public class DataInit {
 	DaoDomaine daoDomaine;
 	
 	@Autowired
+	DaoEmprunt daoEmprunt;
+
+	@Autowired
 	DaoPersonne daoPersonne;
 	
 	@PostConstruct
 	public void initializeDb() {
-		daoLivre.insert(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre3", "auteur3", "editeur3", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre4", "auteur4", "editeur4", true, EtatLivre.BON_ETAT));
-		daoLivre.insert(new Livre (null, "titre5", "auteur5", "editeur5", true, EtatLivre.BON_ETAT));
+		Livre livre1 = daoLivre.save(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre3", "auteur3", "editeur3", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre4", "auteur4", "editeur4", true, EtatLivre.BON_ETAT));
+		daoLivre.save(new Livre (null, "titre5", "auteur5", "editeur5", true, EtatLivre.BON_ETAT));
 		
-		daoDomaine.insert(new Domaine(null, "Aventure", "Ce livre parle d'aventure"));
-		daoDomaine.insert(new Domaine(null, "Amour", "Ce livre parle d'amour"));
-		daoDomaine.insert(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
+		daoDomaine.save(new Domaine(null, "Aventure", "Ce livre parle d'aventure"));
+		daoDomaine.save(new Domaine(null, "Amour", "Ce livre parle d'amour"));
+		daoDomaine.save(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
 		
-		daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
+		Personne personne1 = daoPersonne.insert(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
 		daoPersonne.insert(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
 		daoPersonne.insert(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
 		
+//		Emprunt emprunt1 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1));
+		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.RESERVATION));
+		daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF));
+		
+		personne1.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne1));
+		
+
 	}
 }
