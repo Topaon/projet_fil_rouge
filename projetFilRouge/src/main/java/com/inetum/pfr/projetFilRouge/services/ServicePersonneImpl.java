@@ -8,11 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
+import com.inetum.pfr.projetFilRouge.dto.LivreDto;
+import com.inetum.pfr.projetFilRouge.dto.PersonneDto;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 
 @Service
 @Transactional
-public class ServicePersonneImpl extends AbstractGenericService<Personne, Long> implements ServicePersonne{
+public class ServicePersonneImpl extends AbstractGenericService<Personne, Long, PersonneDto> implements ServicePersonne{
+	
+	@Override
+	public Class<PersonneDto> getDtoClass() {
+		return PersonneDto.class;
+	}
 	
 	Logger logger = LoggerFactory.getLogger(ServicePersonne.class);
 	

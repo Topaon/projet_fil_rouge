@@ -1,8 +1,9 @@
 package com.inetum.pfr.projetFilRouge.services;
 
+import com.inetum.pfr.projetFilRouge.dto.PersonneDto;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 
-public interface ServicePersonne extends GenericService<Personne, Long> {
+public interface ServicePersonne extends GenericService<Personne, Long, PersonneDto> {
 	
 	//	Méthodes hérités de AbstractGenericService :
 

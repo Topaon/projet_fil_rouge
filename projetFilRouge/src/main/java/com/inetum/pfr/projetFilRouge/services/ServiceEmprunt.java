@@ -1,10 +1,12 @@
 package com.inetum.pfr.projetFilRouge.services;
 
-import com.inetum.pfr.projetFilRouge.entity.Emprunt;
-import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
 import java.util.List;
 
-public interface ServiceEmprunt extends GenericService<Emprunt, Long> {
+import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
+import com.inetum.pfr.projetFilRouge.entity.Emprunt;
+import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
+
+public interface ServiceEmprunt extends GenericService<Emprunt, Long, EmpruntDto> {
 	
 	//	Méthodes hérités de AbstractGenericService :
 

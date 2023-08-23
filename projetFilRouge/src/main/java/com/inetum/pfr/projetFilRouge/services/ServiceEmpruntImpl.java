@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
+import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
@@ -21,7 +22,12 @@ import com.inetum.pfr.projetFilRouge.util.AppUtil;
 
 @Service
 @Transactional
-public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> implements ServiceEmprunt {
+public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, EmpruntDto> implements ServiceEmprunt {
+	
+	@Override
+	public Class<EmpruntDto> getDtoClass() {
+		return EmpruntDto.class;
+	}
 
 	
 	// ATTRIBUTS -------------------
