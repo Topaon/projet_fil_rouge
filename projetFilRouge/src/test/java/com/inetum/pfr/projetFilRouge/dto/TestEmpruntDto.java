@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.inetum.pfr.projetFilRouge.converter.DtoConverter;
+import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
@@ -19,6 +21,7 @@ import com.inetum.pfr.projetFilRouge.entity.Personne;
 public class TestEmpruntDto {
 	
 	Logger logger = LoggerFactory.getLogger(TestEmpruntDto.class);
+	DtoConverter dtoConverter = new DtoConverter();
 	
 	@Test
 	public void testpersonneDto() {
@@ -26,9 +29,11 @@ public class TestEmpruntDto {
 		Personne personne1 = new Personne(1L, "Nom", "Prenom", "Email", "Adresse");
 		Emprunt emprunt1 = new Emprunt(1L, TypeEmprunt.EFFECTIF, livre1, personne1);
 		
-		EmpruntDto emprunt1Dto = GenericConverter.map(emprunt1, EmpruntDto.class);
-		assertEquals(emprunt1.getPersonne(), emprunt1Dto.getPersonne());
-		assertEquals(emprunt1.getLivre(), emprunt1Dto.getLivre());
+		EmpruntDto emprunt1Dto = dtoConverter.empruntToEmpruntDto(emprunt1);
+		assertEquals(emprunt1.getPersonne().getNom().toUpperCase(), emprunt1Dto.getPersonneLastName());
+		assertEquals(emprunt1.getPersonne().getPrenom(), emprunt1Dto.getPersonneFirstName());
+		assertEquals(emprunt1.getLivre().getId(), emprunt1Dto.getLivreId());
+		assertEquals(emprunt1.getDateDebut(), emprunt1Dto.getDateDebut());
 		assertEquals(emprunt1.getDateFin(), emprunt1Dto.getDateFin());
 	}
 }

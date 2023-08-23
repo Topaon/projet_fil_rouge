@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inetum.pfr.projetFilRouge.dto.GenericConverter;
+import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.dto.LivreDto;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.services.ServiceLivre;

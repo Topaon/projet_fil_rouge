@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.dao.TestDaoEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Livre.EtatLivre;

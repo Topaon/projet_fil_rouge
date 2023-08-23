@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.inetum.pfr.projetFilRouge.dto.GenericConverter;
+import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 
 public abstract class AbstractGenericService<E, ID, DTO> implements GenericService<E, ID, DTO> {

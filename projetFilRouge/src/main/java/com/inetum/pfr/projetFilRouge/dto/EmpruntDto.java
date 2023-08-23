@@ -11,9 +11,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter@Setter@NoArgsConstructor@AllArgsConstructor@ToString
+@Getter@Setter@NoArgsConstructor@ToString
 public class EmpruntDto {
-	private Personne personne;
-	private Livre livre;
+	private Long id;
+	private String personneFirstName;
+	private String personneLastName;
+	private Long livreId;
+	private Date dateDebut;
 	private Date dateFin;
+	
+	
+	public EmpruntDto(Long id, String personneFirstName, String personneLastName, Long livreId, Date dateDebut,
+			Date dateFin) {
+		super();
+		this.id = id;
+		this.personneFirstName = personneFirstName;
+		this.personneLastName = personneLastName;
+		this.livreId = livreId;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+	}	
 }
