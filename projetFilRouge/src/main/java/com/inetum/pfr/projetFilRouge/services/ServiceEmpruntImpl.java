@@ -1,5 +1,8 @@
 package com.inetum.pfr.projetFilRouge.services;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -14,6 +17,7 @@ import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
+import com.inetum.pfr.projetFilRouge.util.AppUtil;
 
 @Service
 @Transactional
@@ -42,9 +46,11 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> im
 	
 	// METHODES ---------------------
 	
+		// méthodes métiers
 	
 	@Override
 	public void emprunter(Long personneId, Long livreId) {
+		
 		Livre livreAEmprunter = daoLivre.findById(livreId).orElse(null);
 		Personne emprunteur = daoPersonne.findById(personneId).orElse(null);
 		
@@ -63,13 +69,18 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> im
 	@Override
 	public void prolonger(Long empruntId) {
 		
+		Emprunt empruntAProlonger = daoEmprunt.findById(empruntId).orElse(null);
+		Date dateFinEmprunt = empruntAProlonger.getDateFin();
+		Date dateDuJour = new Date();
+		Long joursDeRetard = ChronoUnit.DAYS.between(AppUtil.asLocalDate(dateFinEmprunt), AppUtil.asLocalDate(dateDuJour));
 		
-		
-		
-		
-		
-		
+		if (joursDeRetard <= 7) {
+			empruntAProlonger.setDateFin(AppUtil.ajouterJours(dateFinEmprunt, 7));	
+		} else {
+			throw new EmpruntException("Prolongement de l'emprunt non autorisé car retard de retour au delà de 7 jours, nombre de jours de retard = " + joursDeRetard);
+		};		
 	}
+	
 	
 	@Override
 	public void retourner(Long empruntId) {
@@ -81,6 +92,9 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> im
 		livreARetourner.setDispo(true);
 		
 	}
+	
+	
+		// Méthodes SpringData & NamedQueries
 
 	@Override
 	public Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId) {

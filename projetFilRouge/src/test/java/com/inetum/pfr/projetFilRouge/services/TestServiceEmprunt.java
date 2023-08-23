@@ -2,6 +2,8 @@ package com.inetum.pfr.projetFilRouge.services;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,7 @@ import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Livre.EtatLivre;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
+import com.inetum.pfr.projetFilRouge.util.AppUtil;
 
 @SpringBootTest
 @ActiveProfiles({"oracle"})
@@ -56,6 +59,8 @@ public class TestServiceEmprunt {
 		Emprunt emprunt6 = serviceEmprunt.saveOrUpdate(new Emprunt(null, TypeEmprunt.EFFECTIF, livre6, pers1));
 		Emprunt emprunt7 = serviceEmprunt.saveOrUpdate(new Emprunt(null, TypeEmprunt.EFFECTIF, livre9, pers2));
 
+	// EMPRUNT  pers1 livre8	
+		
 	assertTrue(serviceEmprunt.searchAll().size()== 7);
 	
 	try {
@@ -66,9 +71,10 @@ public class TestServiceEmprunt {
 	
 	assertTrue(serviceEmprunt.searchAll().size()== 8);
 	
+	// RETOUR  pers1 livre8	
 	
 	Emprunt empruntARetourner = serviceEmprunt.searchByPersonneIdAndLivreIdAndEnCoursTrue(pers1.getId(), livre8.getId());
-	assertTrue(serviceEmprunt.searchByPersonneIdAndLivreIdAndEnCoursTrue(pers1.getId(), livre8.getId()).isEnCours() == true);
+	assertTrue(empruntARetourner.isEnCours() == true);
 	logger.trace("Emprunt à retourner: " + empruntARetourner.isEnCours());
 	
 	serviceEmprunt.retourner(empruntARetourner.getId());
@@ -77,6 +83,26 @@ public class TestServiceEmprunt {
 	assertTrue(serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre8.getId()).isEnCours() == false);
 	logger.trace("Emprunt retourné: " + serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre8.getId()).isEnCours());
 	
+	
+	// PROLONGER  pers1 livre1	
+	
+	try {
+		serviceEmprunt.prolonger(serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre1.getId()).getId());
+		logger.trace("Emprunt prolongé: " + serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre1.getId()));
+	} catch (Exception e) {
+		logger.trace(e.getMessage());
+	}
+	
+	Emprunt empruntAModifierPourTestProlongement = serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre2.getId());
+	empruntAModifierPourTestProlongement.setDateFin(AppUtil.retirerJours(new Date(), 15));
+	serviceEmprunt.saveOrUpdate(empruntAModifierPourTestProlongement);
+	
+	try {
+		serviceEmprunt.prolonger(empruntAModifierPourTestProlongement.getId());
+		logger.trace("Emprunt prolongé: " + serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre2.getId()));
+	} catch (Exception e) {
+		logger.trace(e.getMessage());
+	}
 
 	}
 	
