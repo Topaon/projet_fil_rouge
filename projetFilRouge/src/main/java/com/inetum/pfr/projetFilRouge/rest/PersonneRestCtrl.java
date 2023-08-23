@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
+import com.inetum.pfr.projetFilRouge.dto.PersonneDto;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.services.ServicePersonne;
 
@@ -32,22 +33,16 @@ public class PersonneRestCtrl {
 	// URL: ./api-bibliotheque/Personne
 
 	@GetMapping("")
-	public List<Personne> getAllPersonnes() {
-		return servicePersonne.searchAll();
+	public List<PersonneDto> getAllPersonnes() {
+		return servicePersonne.searchAllDto();
 	}
 
 	// exemple d'URL: ./api-bibliotheque/personne/1
 	// permet de trouver une personne avec son ID
 
 	@GetMapping("/{PersonneId}")
-	public ResponseEntity<?> getPersonneById(@PathVariable("PersonneId") Long id) {
-		Personne Personne = servicePersonne.searchById(id);
-
-		if (Personne != null) {
-			return new ResponseEntity<Personne>(Personne, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<String>("Personne non trouvée", HttpStatus.NOT_FOUND);
-		}
+	public PersonneDto getPersonneById(@PathVariable("PersonneId") Long id) {
+		return servicePersonne.searchDtoById(id);
 	}
 
 	// CREATE

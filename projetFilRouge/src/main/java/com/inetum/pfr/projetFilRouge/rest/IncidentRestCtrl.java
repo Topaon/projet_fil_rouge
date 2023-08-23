@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inetum.pfr.projetFilRouge.dto.DomaineDto;
+import com.inetum.pfr.projetFilRouge.dto.GenericConverter;
+import com.inetum.pfr.projetFilRouge.dto.IncidentDto;
+import com.inetum.pfr.projetFilRouge.entity.Domaine;
 import com.inetum.pfr.projetFilRouge.entity.Incident;
 import com.inetum.pfr.projetFilRouge.services.ServiceIncident;
 
@@ -24,18 +28,18 @@ public class IncidentRestCtrl {
 	ServiceIncident serviceIncident;
 	
 	@GetMapping("")
-	public List<Incident> getAllIncidents() {
-		return serviceIncident.searchAll();
+	public List<IncidentDto> getAllIncidents() {
+		return serviceIncident.searchAllDto();
 	}
 	
 	@GetMapping("/{id}")
-	public Incident getIncidentById(@PathVariable("id") Long id ) {
-		return serviceIncident.searchById(id);
+	public IncidentDto getIncidentById(@PathVariable("id") Long id ) {
+		return serviceIncident.searchDtoById(id);
 	}
 	
 	@PostMapping("")
-	public Incident addIncident(@RequestBody Incident Incident) {
-		return serviceIncident.saveOrUpdate(Incident);
+	public Incident addIncident(@RequestBody Incident incident) {
+		return serviceIncident.saveOrUpdate(incident);
 	}
 		
 	@PutMapping("")
