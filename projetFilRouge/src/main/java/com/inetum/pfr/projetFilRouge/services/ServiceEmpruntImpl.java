@@ -82,10 +82,17 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> im
 	
 
 	@Override
-	public Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId) {
-		return daoEmprunt.findByPersonneIdAndLivreId(personneId, livreId);
+	public Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId) {
+		return daoEmprunt.findByPersonneIdAndLivreIdAndEnCoursTrue(personneId, livreId);
 		
 	}
+
+	@Override
+	public Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId) {
+		return daoEmprunt.findByPersonneIdAndLivreId(personneId, livreId);
+	}
+	
+	
 	
 
 

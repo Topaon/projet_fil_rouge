@@ -67,13 +67,15 @@ public class TestServiceEmprunt {
 	assertTrue(serviceEmprunt.searchAll().size()== 8);
 	
 	
-	Emprunt empruntARetourner = serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre8.getId());
-	assertTrue(serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre8.getId()).isEnCours() == true);
+	Emprunt empruntARetourner = serviceEmprunt.searchByPersonneIdAndLivreIdAndEnCoursTrue(pers1.getId(), livre8.getId());
+	assertTrue(serviceEmprunt.searchByPersonneIdAndLivreIdAndEnCoursTrue(pers1.getId(), livre8.getId()).isEnCours() == true);
+	logger.trace("Emprunt à retourner: " + empruntARetourner.isEnCours());
 	
 	serviceEmprunt.retourner(empruntARetourner.getId());
 	
 	assertTrue(serviceEmprunt.searchAll().size()== 8);
 	assertTrue(serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre8.getId()).isEnCours() == false);
+	logger.trace("Emprunt retourné: " + serviceEmprunt.searchByPersonneIdAndLivreId(pers1.getId(), livre8.getId()).isEnCours());
 	
 
 	}

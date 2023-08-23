@@ -22,6 +22,7 @@ public interface ServiceEmprunt extends GenericService<Emprunt, Long> {
 	
 	// NamedQuery
 	
+	Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId);
 	Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId);
 	
 
