@@ -5,11 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.inetum.pfr.projetFilRouge.converter.DtoConverter;
-import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
+import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
+import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
+import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
@@ -35,5 +38,8 @@ public class TestEmpruntDto {
 		assertEquals(emprunt1.getLivre().getId(), emprunt1Dto.getLivreId());
 		assertEquals(emprunt1.getDateDebut(), emprunt1Dto.getDateDebut());
 		assertEquals(emprunt1.getDateFin(), emprunt1Dto.getDateFin());
+		
+		logger.trace("emprunt1:" + emprunt1);
+		logger.trace("emprunt1Dto:" + emprunt1Dto);
 	}
 }

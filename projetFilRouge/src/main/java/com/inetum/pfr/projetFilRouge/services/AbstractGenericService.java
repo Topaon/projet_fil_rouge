@@ -60,7 +60,7 @@ public abstract class AbstractGenericService<E, ID, DTO> implements GenericServi
 
 	@Override
 	public List<DTO> searchAllDto() {
-		List<E> le = (List<E>) getDao().findAll();
+		List<E> le = this.searchAll();
 		return GenericConverter.map(le, getDtoClass());
 	}
 }
