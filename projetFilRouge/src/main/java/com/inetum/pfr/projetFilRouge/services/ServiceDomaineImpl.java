@@ -7,11 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
+import com.inetum.pfr.projetFilRouge.dto.DomaineDto;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
 
 @Service
 @Transactional
-public class ServiceDomaineImpl extends AbstractGenericService<Domaine, Long> implements ServiceDomaine {
+public class ServiceDomaineImpl extends AbstractGenericService<Domaine, Long, DomaineDto> implements ServiceDomaine {
 
 	@Autowired
 	DaoDomaine daoDomaine;
@@ -19,5 +20,10 @@ public class ServiceDomaineImpl extends AbstractGenericService<Domaine, Long> im
 	@Override
 	public CrudRepository<Domaine, Long> getDao() {
 		return this.daoDomaine;
+	}
+
+	@Override
+	public Class<DomaineDto> getDtoClass() {
+		return DomaineDto.class;
 	}
 }

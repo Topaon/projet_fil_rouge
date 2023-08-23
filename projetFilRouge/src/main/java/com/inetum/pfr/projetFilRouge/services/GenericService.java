@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 
-public interface GenericService<E, ID> {
+public interface GenericService<E, ID, DTO> {
 	public E searchById(ID id) throws NotFoundException;
 	
 	public E saveOrUpdate(E entity);

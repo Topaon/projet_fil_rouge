@@ -1,4 +1,4 @@
-package com.inetum.pfr.projetFilRouge.exception;
+package com.inetum.pfr.projetFilRouge.rest;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+import com.inetum.pfr.projetFilRouge.exception.ApiError;
+import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
