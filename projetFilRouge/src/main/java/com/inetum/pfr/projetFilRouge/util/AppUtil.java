@@ -14,6 +14,13 @@ public class AppUtil {
 
 	}
 
+	public static Date retirerJours(Date date, Integer jours) {
+		LocalDate localDate = asLocalDate(date);
+		localDate = localDate.minusDays(jours);
+		return asDate(localDate);
+		
+	}
+	
 	public static Date asDate(LocalDate localDate) {
 		return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
 

@@ -1,5 +1,7 @@
 package com.inetum.pfr.projetFilRouge.services;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -79,7 +81,6 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> im
 		livreARetourner.setDispo(true);
 		
 	}
-	
 
 	@Override
 	public Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId) {
@@ -91,9 +92,9 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long> im
 	public Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId) {
 		return daoEmprunt.findByPersonneIdAndLivreId(personneId, livreId);
 	}
-	
-	
-	
 
-
+	@Override
+	public List<Emprunt> tousLesRetards() {
+		return daoEmprunt.getLateReturn();
+	}
 }

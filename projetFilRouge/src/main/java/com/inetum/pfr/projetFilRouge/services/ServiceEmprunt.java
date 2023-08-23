@@ -2,6 +2,7 @@ package com.inetum.pfr.projetFilRouge.services;
 
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
+import java.util.List;
 
 public interface ServiceEmprunt extends GenericService<Emprunt, Long> {
 	
@@ -24,6 +25,7 @@ public interface ServiceEmprunt extends GenericService<Emprunt, Long> {
 	
 	Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId);
 	Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId);
+	List<Emprunt> tousLesRetards();
 	
 
 }
