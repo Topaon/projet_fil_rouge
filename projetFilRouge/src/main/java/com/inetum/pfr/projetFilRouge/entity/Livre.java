@@ -16,6 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -55,6 +57,7 @@ public class Livre {
 	private List<Domaine> domaines = new ArrayList <>();
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="livre")
+	@JsonIgnore
 	private List<Emprunt> emprunts;
 	
 	public Livre(Long id, String titre, String auteur, String editeur, Boolean dispo, EtatLivre etat) {

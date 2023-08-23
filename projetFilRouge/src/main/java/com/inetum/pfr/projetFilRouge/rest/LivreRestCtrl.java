@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inetum.pfr.projetFilRouge.dto.GenericConverter;
+import com.inetum.pfr.projetFilRouge.dto.LivreDto;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.services.ServiceLivre;
 
@@ -36,14 +38,9 @@ public class LivreRestCtrl {
 	// permet de trouver un livre avec son ID
 
 	@GetMapping("/{livreId}")
-	public ResponseEntity<Livre> getLivreById(@PathVariable("livreId") Long id) {
-		Livre livre = serviceLivre.searchById(id);
-
-		if (livre != null) {
-			return new ResponseEntity<Livre>(livre, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Livre>(HttpStatus.NOT_FOUND);
-		}
+	public Livre getLivreById(@PathVariable("livreId") Long id) {
+		return serviceLivre.searchById(id);
+//		return GenericConverter.map(livre, LivreDto.class);
 	}
 
 	// CREATE

@@ -46,7 +46,7 @@ public class PersonneRestCtrl {
 		if (Personne != null) {
 			return new ResponseEntity<Personne>(Personne, HttpStatus.OK);
 		} else {
-			return new ResponseEntity<String>("Personne nom trouvée", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<String>("Personne non trouvée", HttpStatus.NOT_FOUND);
 		}
 	}
 

@@ -2,8 +2,10 @@ package com.inetum.pfr.projetFilRouge.services;
 
 import java.util.List;
 
+import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
+
 public interface GenericService<E, ID> {
-	public E searchById(ID id);
+	public E searchById(ID id) throws NotFoundException;
 	
 	public E saveOrUpdate(E entity);
 	
@@ -12,7 +14,4 @@ public interface GenericService<E, ID> {
 	public boolean existsById (ID id);
 	
 	public List<E>searchAll();
-	
-	
-
 }
