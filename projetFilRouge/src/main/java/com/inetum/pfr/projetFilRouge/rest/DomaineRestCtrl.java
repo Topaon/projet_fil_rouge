@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inetum.pfr.projetFilRouge.dto.DomaineDto;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
 import com.inetum.pfr.projetFilRouge.services.ServiceDomaine;
 
@@ -24,13 +25,13 @@ public class DomaineRestCtrl {
 	ServiceDomaine serviceDomaine;
 	
 	@GetMapping("")
-	public List<Domaine> getAllDomaines() {
-		return serviceDomaine.searchAll();
+	public List<DomaineDto> getAllDomaines() {
+		return serviceDomaine.searchAllDto();
 	}
 	
 	@GetMapping("/{id}")
-	public Domaine getDomaineById(@PathVariable("id") Long id ) {
-		return serviceDomaine.searchById(id);
+	public DomaineDto getDomaineById(@PathVariable("id") Long id ) {
+		return serviceDomaine.searchDtoById(id);
 	}
 	
 	@PostMapping("")

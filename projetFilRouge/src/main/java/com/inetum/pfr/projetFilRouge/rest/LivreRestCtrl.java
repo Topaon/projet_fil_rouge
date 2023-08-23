@@ -30,16 +30,16 @@ public class LivreRestCtrl {
 	// URL: ./api-bibliotheque/livre
 
 	@GetMapping("")
-	public List<Livre> getAllLivres() {
-		return serviceLivre.searchAll();
+	public List<LivreDto> getAllLivres() {
+		return serviceLivre.searchAllDto();
 	}
 
 	// exemple d'URL: ./api-bibliotheque/livre/1
 	// permet de trouver un livre avec son ID
 
 	@GetMapping("/{livreId}")
-	public Livre getLivreById(@PathVariable("livreId") Long id) {
-		return serviceLivre.searchById(id);
+	public LivreDto getLivreById(@PathVariable("livreId") Long id) {
+		return serviceLivre.searchDtoById(id);
 //		return GenericConverter.map(livre, LivreDto.class);
 	}
 
