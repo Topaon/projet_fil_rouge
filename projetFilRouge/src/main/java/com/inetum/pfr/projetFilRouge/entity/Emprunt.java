@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -23,7 +24,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-
+@NamedQuery(name = "Emprunt.getLateReturn", query = "SELECT e FROM Emprunt e"
+													+ " WHERE e.dateFin<CURRENT_TIMESTAMP AND e.enCours=true AND e.type='EFFECTIF'")
 public class Emprunt {
 	
 //	@EmbeddedId
@@ -65,15 +67,10 @@ public class Emprunt {
 		this.personne = personne;
 		this.enCours = true;
 	}
-	
-
 
 	@Override
 	public String toString() {
 		return "Emprunt [id=" + id +  ", dateDebut=" + dateDebut + ", dateFin=" + dateFin
 				+ ", type=" + type + "]";
 	}
-	
-	
-
 }

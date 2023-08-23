@@ -23,7 +23,7 @@ public interface ServiceEmprunt extends GenericService<Emprunt, Long> {
 	
 	// NamedQuery
 	
-
+	List<Emprunt> tousLesRetards();
 	
 
 }

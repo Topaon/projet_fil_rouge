@@ -8,5 +8,5 @@ import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 
 public interface DaoEmprunt extends JpaRepository<Emprunt, Long>{
 	
-
+	public List<Emprunt> getLateReturn();
 }
