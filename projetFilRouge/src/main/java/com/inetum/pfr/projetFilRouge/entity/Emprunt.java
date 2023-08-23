@@ -26,9 +26,6 @@ import lombok.Setter;
 
 public class Emprunt {
 	
-//	@EmbeddedId
-//	private EmpruntPersonneId pk ;
-	
 	public enum TypeEmprunt {
 		RESERVATION, EFFECTIF
 	};
