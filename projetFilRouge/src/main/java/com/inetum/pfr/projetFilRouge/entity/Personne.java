@@ -12,6 +12,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +35,7 @@ public class Personne {
 	private String adresse;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="personne")
+	@JsonIgnore
 	private List<Emprunt> emprunts = new ArrayList<>();
 	
 	// Constructeur
