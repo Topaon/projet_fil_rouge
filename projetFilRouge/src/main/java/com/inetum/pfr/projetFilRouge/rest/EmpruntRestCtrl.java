@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.services.ServiceEmprunt;
 
@@ -30,8 +31,8 @@ public class EmpruntRestCtrl {
 	// URL: ./api-bibliotheque/emprunt
 	
 	@GetMapping("")
-	public List<Emprunt> getAllEmprunts() {
-		return serviceEmprunt.searchAll();
+	public List<EmpruntDto> getAllEmprunts() {
+		return serviceEmprunt.searchAllDto();
 	}
 	
 	

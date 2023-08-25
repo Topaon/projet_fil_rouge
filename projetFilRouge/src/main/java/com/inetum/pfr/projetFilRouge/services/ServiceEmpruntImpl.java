@@ -1,6 +1,5 @@
 package com.inetum.pfr.projetFilRouge.services;
 
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
@@ -9,6 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.inetum.pfr.projetFilRouge.converter.DtoConverter;
 import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
@@ -33,8 +33,10 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 	// ATTRIBUTS -------------------
 	
 	private DaoEmprunt daoEmprunt;
+	private EmpruntDto dtoEmprunt;
 	private DaoLivre daoLivre;
 	private DaoPersonne daoPersonne;
+	private DtoConverter dtoConverter = new DtoConverter();
 	
 		// attributs remonté à la classe mère
 	public CrudRepository<Emprunt, Long> getDao() {
@@ -116,5 +118,13 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 	@Override
 	public List<Emprunt> tousLesRetards() {
 		return daoEmprunt.getLateReturn();
+	}
+	
+	
+		// Surcharge AbstractGenericService
+	
+	public List<EmpruntDto> searchAllDto() {
+		List<Emprunt> le = daoEmprunt.findAll();
+		return dtoConverter.empruntToEmpruntDto(le);
 	}
 }

@@ -1,5 +1,7 @@
 package com.inetum.pfr.projetFilRouge.converter;
 
+import java.util.List;
+
 import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 
@@ -19,6 +21,12 @@ public class DtoConverter {
 		
 		return empruntDto;
 		
+	}
+	
+	public List<EmpruntDto> empruntToEmpruntDto(List<Emprunt> entityList) {
+		return entityList.stream()
+		       .map((entity)->empruntToEmpruntDto(entity))
+		       .toList();
 	}
 
 }
