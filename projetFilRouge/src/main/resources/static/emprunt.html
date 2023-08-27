@@ -3,9 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Livre test</title>
-	<script src="./js/livreAjax.js"></script>
+	<script src="./js/empruntAjax.js"></script>
 	<script src="./js/my_ajax_util.js"></script>
 </head>
 
@@ -18,6 +18,18 @@
 	ID livre : <input id="inputIdLivre" />
 	<button id="addButton">Emprunter</button>
 	<hr />
+	
+	<h2>Liste des emprunts</h2>
+		<table border="1">
+			<thead>
+				<tr><th>Id Emprunt</th><th>Id livre</th><th>Nom Lecteur</th><th>Prénom Lecteur</th><th>Date début emprunt</th><th>Date fin emprunt</th></tr>
+			</thead>
+			<tbody id="tableBody">
+				
+			</tbody>
+		</table>
+	
+	
 </body>
 
 </html>
