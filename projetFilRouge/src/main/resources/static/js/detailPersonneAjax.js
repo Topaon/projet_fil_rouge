@@ -1,9 +1,15 @@
 window.onload=function(){
-	getPersonne();
+	loadLoan();
+	(document.getElementById("btn_loan_page"))
+	   .addEventListener("click",nouvelEmprunt);
 }
 
-function getPersonne(){
-	var urlParams = new URL(window.location.href).searchParams;
-	var id = urlParams.get('id');
-	console.log(id)
+var id = new URL(window.location.href).searchParams.get('id');
+
+function nouvelEmprunt(){
+	window.location.href = "http://localhost:8080/projetFilRouge/livre.html?id=" + id;
+}
+
+function loadLoan(){
+	afficherTousLesEmpruntsParPersonId(id);
 }

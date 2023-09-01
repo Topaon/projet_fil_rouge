@@ -14,6 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.inetum.pfr.projetFilRouge.util.AppUtil;
 
 import lombok.Getter;

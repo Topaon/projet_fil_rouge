@@ -24,7 +24,7 @@ makeAjaxGetRequest(wsUrl,function(responseJson){
 		(row.insertCell(5)).innerHTML = Livre.etat;
 		if(Livre.dispo){
 			(row.insertCell(6)).innerHTML = 
-			"<button class='btn btn-success' onclick='emprunterLivre()'>Emprunter</button>"
+			"<button class='btn btn-success' onclick='emprunterLivre(" + Livre.id + ")'>Emprunter</button>"
 			+ "<button class='btn btn-warning' onclick='reserverLivre()'>Réserver</button>";
 		} else {
 			(row.insertCell(6)).innerHTML = 
@@ -89,8 +89,14 @@ function chercherLivre(){
 	console.log("chercherLivre")
 }
 
-function emprunterLivre(){
-	console.log("emprunterLivre")
+function emprunterLivre(lId){
+	var urlParams = new URL(window.location.href).searchParams;
+	var pId = urlParams.get('id');
+	
+	console.log(pId, lId)
+	console.log(pId, Number(lId))
+	
+	ajouterEmprunt(pId, Number(lId))
 }
 
 function reserverLivre(){

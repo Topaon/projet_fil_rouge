@@ -16,6 +16,7 @@ public class DtoConverter {
 		empruntDto.setPersonneLastName(entity.getPersonne().getNom().toUpperCase());
 		empruntDto.setPersonneFirstName(entity.getPersonne().getPrenom());
 		empruntDto.setLivreId(entity.getLivre().getId());
+		empruntDto.setTitre(entity.getLivre().getTitre());
 		empruntDto.setDateDebut(entity.getDateDebut());
 		empruntDto.setDateFin(entity.getDateFin());
 		empruntDto.setEnCours(entity.isEnCours());
