@@ -33,9 +33,16 @@ function ajouterEmprunt() {
 
 	let wsUrl = "./api-bibliotheque/emprunt/emprunter?personneId=" + personneId + "&livreId=" + livreId;
 
-	makeAjaxGetRequest(wsUrl, function() {
-		afficherTousLesEmprunts()
-	})
+	makeAjaxGetRequest(
+		wsUrl,
+		function(xhrResponseText) {
+			afficherTousLesEmprunts()
+			let xhrResponseTextJs = JSON.parse(xhrResponseText);
+			console.log(xhrResponseTextJs)
+		}, function(xhrResponseTextErr) {
+			let errCallback = JSON.parse(xhrResponseTextErr);
+			console.log(errCallback)
+		})
 }
 
 function prolongerEmprunt() {
@@ -44,9 +51,18 @@ function prolongerEmprunt() {
 
 	let wsUrl = "./api-bibliotheque/emprunt/prolonger?empruntId=" + empruntId;
 
-	makeAjaxGetRequest(wsUrl, function() {
-		afficherTousLesEmprunts()
-	})
+	makeAjaxGetRequest(
+		wsUrl,
+		function(xhrResponseText) {
+			afficherTousLesEmprunts()
+			let xhrResponseTextJs = JSON.parse(xhrResponseText);
+			console.log(xhrResponseTextJs)
+		},
+		function(xhrResponseTextErr) {
+			let errCallback = JSON.parse(xhrResponseTextErr);
+			console.log(errCallback)
+		}
+	)
 }
 
 function retournerEmprunt() {
@@ -55,7 +71,13 @@ function retournerEmprunt() {
 
 	let wsUrl = "./api-bibliotheque/emprunt/retourner?empruntId=" + empruntId;
 
-	makeAjaxGetRequest(wsUrl, function() {
-		afficherTousLesEmprunts()
-	})
+	makeAjaxGetRequest(
+		wsUrl,
+		function() {
+			afficherTousLesEmprunts()
+		},
+		function(xhrResponseTextErr) {
+			let errCallback = JSON.parse(xhrResponseTextErr);
+			console.log(errCallback)
+		})
 }
