@@ -1,5 +1,5 @@
-#tab_container{
-	
+#img_profil{
+	width: 80px
 }
 
 #input_livre_id{
@@ -15,8 +15,4 @@
 
 .btn{
 	margin: 5px
-}
-
-#img_profil{
-	width: 80px
 }

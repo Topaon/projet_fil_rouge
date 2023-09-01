@@ -3,18 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Accueil</title>
-<script src="./js/indexAjax.js"></script>
+<title>Insert title here</title>
+<script src="./js/adminAjax.js"></script>
 <script src="./js/my_ajax_util.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="css/admin.css" rel="stylesheet"/>
 <link href="css/index.css" rel="stylesheet"/>
 </head>
 <body class="container">
 	<div class="row" id="header" style="height: 100px">
         <div class="col-xl">
-			<img src="assets/logo.jpg" id="img_profil"/>
+
         </div>
         <div class="col-xl-2 text-center">
 			<a href="personne.html">
@@ -25,17 +26,16 @@
     </div>
     <div class="row" id="body">
 		<div class="col-xl-1">
-			<a class='btn btn-light' href="index.html">Mes emprunts</a>
-			<a class='btn btn-light' href="admin.html">Admin</a>
+			<a class='btn btn-light' href="index.html">Accueil</a>
 		</div>
 		<div class="col-xl text-center" id="tab_container">
 			<div id="filter_container">
 				<input type="text" class="form-control" id="input_livre_id" placeholder="Entrez l'id du livre"/>
 				<button class="btn btn-primary" id="btn_livre_search">Recherche</button>
 			</div>
-			<table border="1" class="table">
+			<table border="1" class="table table-hover">
 				<thead>
-					<tr><th>Id</th><th>Titre</th><th>Auteur</th><th>Editeur</th><th>Disponible</th><th>Etat</th><th>Action</th></tr>
+					<tr><th>Id</th><th>Nom</th><th>Prenom</th><th>Email</th><th>Adresse</th></tr>
 				</thead>
 				<tbody id="tableBody">
 					
@@ -46,5 +46,6 @@
 			
 		</div>
     </div>
+	
 </body>
 </html>
