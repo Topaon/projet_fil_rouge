@@ -1,12 +1,9 @@
 window.onload=function(){
 	afficherTousLesLivres();
-	(document.getElementById("addButton"))
-	   .addEventListener("click",ajouterLivre);
-	(document.getElementById("updateButton"))
-	   .addEventListener("click",modifierLivre);
-	(document.getElementById("deleteButton"))
-	   .addEventListener("click",supprimerLivre);
+	(document.getElementById("btn_livre_search"))
+	   .addEventListener("click",chercherLivre);
 }
+
 
 function afficherTousLesLivres(){	
 
@@ -25,6 +22,14 @@ makeAjaxGetRequest(wsUrl,function(responseJson){
 		(row.insertCell(3)).innerHTML = Livre.editeur;
 		(row.insertCell(4)).innerHTML = Livre.dispo;
 		(row.insertCell(5)).innerHTML = Livre.etat;
+		if(Livre.dispo){
+			(row.insertCell(6)).innerHTML = 
+			"<button class='btn btn-success' onclick='emprunterLivre()'>Emprunter</button>"
+			+ "<button class='btn btn-warning' onclick='reserverLivre()'>Réserver</button>";
+		} else {
+			(row.insertCell(6)).innerHTML = 
+			"<button class='btn btn-warning' onclick='reserverLivre()'>Réserver</button>";
+		}
 	};
 })
 }	
@@ -52,14 +57,12 @@ function ajouterLivre() {
 }
 
 function modifierLivre() {
-	console.log("Fonction modifier livre")
 	let id = (document.getElementById("inputUpdateIdBookToUpdate")).value;	
 	let titre = (document.getElementById("inputUpdateBookTitle")).value;
 	let auteur = (document.getElementById("inputUpdateBookAutor")).value;
 	let editeur = (document.getElementById("inputUpdateBookEditor")).value;
 	let dispo = (document.getElementById("selectUpdateBookAvailable")).value;
 	let etat = (document.getElementById("selectUpdateBookCondition")).value;
-	console.log("Moisson terminée");
 	let LivreJs = {
 		id: id,
 		titre : titre,
@@ -71,7 +74,6 @@ function modifierLivre() {
 	
 	let LivreJson = JSON.stringify(LivreJs);
 	let url = "./api-bibliotheque/livre";
-	console.log(LivreJson);
 	makeAjaxPutRequest(url, LivreJson, function(responseJson) {
 		afficherTousLesLivres()});
 }
@@ -79,7 +81,18 @@ function modifierLivre() {
 function supprimerLivre() {
 	let id = document.getElementById("inputDeleteBookById").value;
 	let deleteUrl = "./api-bibliotheque/livre/" + id;
-	console.log(deleteUrl);
 	makeAjaxDeleteRequest(deleteUrl, function(responseJson) {
 		afficherTousLesLivres()});
+}
+
+function chercherLivre(){
+	console.log("chercherLivre")
+}
+
+function emprunterLivre(){
+	console.log("emprunterLivre")
+}
+
+function reserverLivre(){
+	console.log("reserverLivre")
 }
