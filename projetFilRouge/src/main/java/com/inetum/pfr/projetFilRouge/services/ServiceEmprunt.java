@@ -19,7 +19,7 @@ public interface ServiceEmprunt extends GenericService<Emprunt, Long, EmpruntDto
 	
 	// Méthodes métier
 	
-	void emprunter(Long personneId, Long livreId) throws EmpruntException;
+	Emprunt emprunter(Long personneId, Long livreId) throws EmpruntException;
 	void prolonger(Long empruntId);
 	void retourner(Long empruntId);
 	

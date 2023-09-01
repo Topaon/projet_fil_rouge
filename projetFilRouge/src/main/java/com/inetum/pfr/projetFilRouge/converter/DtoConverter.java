@@ -18,6 +18,7 @@ public class DtoConverter {
 		empruntDto.setLivreId(entity.getLivre().getId());
 		empruntDto.setDateDebut(entity.getDateDebut());
 		empruntDto.setDateFin(entity.getDateFin());
+		empruntDto.setEnCours(entity.isEnCours());
 		
 		return empruntDto;
 		

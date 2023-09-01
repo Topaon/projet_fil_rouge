@@ -16,13 +16,16 @@
 	<h2>Emprunter un livre</h2>
 	ID Personne: <input id="inputIdPersonne" />
 	ID livre : <input id="inputIdLivre" />
-	<button id="addButton">Emprunter</button>
+	<button id="emprunterButton" onclick="ajouterEmprunt()">Valider</button>
 	<hr />
+	<h2>Prolonger un emprunt</h2>
+	ID Emprunt: <input id="inputIdEmprunt" />
+	<button id="prolongerButton" onclick="prolongerEmprunt()">Valider</button>
 	
 	<h2>Liste des emprunts</h2>
 		<table border="1">
 			<thead>
-				<tr><th>Id Emprunt</th><th>Id livre</th><th>Nom Lecteur</th><th>Prénom Lecteur</th><th>Date début emprunt</th><th>Date fin emprunt</th></tr>
+				<tr><th>Id Emprunt</th><th>Id livre</th><th>Nom Lecteur</th><th>Prénom Lecteur</th><th>Date début emprunt</th><th>Date fin emprunt</th><th>Emprunt en cours</th></tr>
 			</thead>
 			<tbody id="tableBody">
 				

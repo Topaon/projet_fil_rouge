@@ -57,20 +57,27 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 		// méthodes métiers
 	
 	@Override
-	public void emprunter(Long personneId, Long livreId) {
+	public Emprunt emprunter(Long personneId, Long livreId) {
 		
 		Livre livreAEmprunter = daoLivre.findById(livreId).orElse(null);
 		Personne emprunteur = daoPersonne.findById(personneId).orElse(null);
 		
 		boolean dispoLivre = livreAEmprunter.getDispo();
 		boolean maxEmprunts = daoPersonne.countLoansById(personneId).size() >= Personne.maxEmprunts;
-		
-		if (dispoLivre == true && maxEmprunts == false) {
-			Emprunt livreEmprunte = new Emprunt (null, TypeEmprunt.EFFECTIF, livreAEmprunter, emprunteur);
-			daoEmprunt.save(livreEmprunte);
-		} else {
+			
+		if (livreAEmprunter!=null && emprunteur!=null) {
+			
+			if (dispoLivre == true && maxEmprunts == false) {
+				Emprunt livreEmprunte = new Emprunt (null, TypeEmprunt.EFFECTIF, livreAEmprunter, emprunteur);
+				livreAEmprunter.setDispo(false);
+				daoEmprunt.save(livreEmprunte);
+				return livreEmprunte;
+			} else {
 				throw new EmpruntException("Disponibilité du livre = " 
 						+ dispoLivre + "\t Nombre d'emprunts maximum du lecteur atteint = " + maxEmprunts);
+			}
+		} else {
+			throw new EmpruntException("Livre ou emprunteur inexistant");
 		}
 	}
 	

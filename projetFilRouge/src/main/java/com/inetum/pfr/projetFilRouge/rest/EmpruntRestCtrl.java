@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
@@ -52,15 +53,30 @@ public class EmpruntRestCtrl {
 	
 	
 	// CREATE
-	// exemple d'URL: ./api-bibliotheque/emprunt
-	// appelée en POST:
-	// {"id" : null ,"livre" : 1, "dateDebut": 01/07/2023 , "dateFin": 25/07/2023, "type" : "EFFECTIF"}
+	// exemple d'URL: ./api-bibliotheque/emprunt/emprunter?personneId=1&livreId=4
+	// appelée en GET:
 	
-	@PostMapping
-	public Emprunt postEmprunt(@RequestBody Emprunt nouvelEmprunt) {
-		Emprunt EmpruntStocke = serviceEmprunt.saveOrUpdate(nouvelEmprunt);
-		return EmpruntStocke;
+	@GetMapping("/emprunter")
+	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId") Long personneId,
+											@RequestParam(value ="livreId") Long livreId) {
+		 Emprunt emprunter =  serviceEmprunt.emprunter(personneId, livreId);
+		 
+			if (emprunter != null) {
+				return new ResponseEntity<Emprunt>(emprunter, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("{\"err\" : \"Livre ou Personne non trouvée\"}", HttpStatus.NOT_FOUND);
+			}
 	}
+	
+	// PROLONGER
+	// exemple d'URL: ./api-bibliotheque/emprunt/prolonger?empruntId=1
+	// appelée en GET:
+	
+	@GetMapping("/prolonger")
+	public void prolonger (@RequestParam(value = "empruntId") Long empruntId) {
+		 serviceEmprunt.prolonger(empruntId);
+	}
+	
 	
 	
 	// UPDATE

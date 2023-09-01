@@ -1,43 +1,50 @@
-window.onload=function(){
+window.onload = function() {
 	afficherTousLesEmprunts();
-	(document.getElementById("addButton")).addEventListener("click",ajouterEmprunt);
-	}
-	
+}
 
-function afficherTousLesEmprunts(){	
 
-let wsUrl = "./api-bibliotheque/emprunt";
+function afficherTousLesEmprunts() {
 
-makeAjaxGetRequest(wsUrl,function(responseJson){
-	
-	let empruntJs = JSON.parse(responseJson);
-	
-	let bodyElt = document.getElementById("tableBody");
-	bodyElt.innerHTML="";
-	for(let emprunt of empruntJs){
-		let row = bodyElt.insertRow(-1);
-		(row.insertCell(0)).innerHTML = emprunt.id;
-		(row.insertCell(1)).innerHTML = emprunt.livreId;
-		(row.insertCell(2)).innerHTML = emprunt.personneLastName;
-		(row.insertCell(3)).innerHTML = emprunt.personneFirstName;
-		(row.insertCell(4)).innerHTML = emprunt.dateDebut;
-		(row.insertCell(5)).innerHTML = emprunt.dateFin;
-	};
-})
-}	
+	let wsUrl = "./api-bibliotheque/emprunt";
 
-/*function ajouterEmprunt() {
-	
+	makeAjaxGetRequest(wsUrl, function(xhrResponseText) {
+
+		let empruntJs = JSON.parse(xhrResponseText);
+
+		let bodyElt = document.getElementById("tableBody");
+		bodyElt.innerHTML = "";
+		for (let emprunt of empruntJs) {
+			let row = bodyElt.insertRow(-1);
+			(row.insertCell(0)).innerHTML = emprunt.id;
+			(row.insertCell(1)).innerHTML = emprunt.livreId;
+			(row.insertCell(2)).innerHTML = emprunt.personneLastName;
+			(row.insertCell(3)).innerHTML = emprunt.personneFirstName;
+			(row.insertCell(4)).innerHTML = emprunt.dateDebut;
+			(row.insertCell(5)).innerHTML = emprunt.dateFin;
+			(row.insertCell(6)).innerHTML = emprunt.enCours;
+		};
+	})
+}
+
+function ajouterEmprunt() {
+
 	let personneId = document.getElementById("inputIdPersonne").value
 	let livreId = document.getElementById("inputIdLivre").value
-	
-	let emprunJs = 
-	{ 
-		
-	}
-	
-	
-	let wsUrl = "./api-bibliotheque/emprunt";
-	
-	
-}*/
+
+	let wsUrl = "./api-bibliotheque/emprunt/emprunter?personneId=" + personneId + "&livreId=" + livreId;
+
+	makeAjaxGetRequest(wsUrl, function() {
+		afficherTousLesEmprunts()
+	})
+}
+
+function prolongerEmprunt() {
+
+	let empruntId = document.getElementById("inputIdEmprunt").value
+
+	let wsUrl = "./api-bibliotheque/emprunt/prolonger?empruntId=" + empruntId;
+
+	makeAjaxGetRequest(wsUrl, function() {
+		afficherTousLesEmprunts()
+	})
+}

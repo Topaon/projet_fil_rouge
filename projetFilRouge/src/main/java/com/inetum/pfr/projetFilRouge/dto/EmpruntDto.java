@@ -19,10 +19,11 @@ public class EmpruntDto {
 	private Long livreId;
 	private Date dateDebut;
 	private Date dateFin;
+	private boolean enCours;
 	
 	
 	public EmpruntDto(Long id, String personneFirstName, String personneLastName, Long livreId, Date dateDebut,
-			Date dateFin) {
+			Date dateFin, boolean enCours) {
 		super();
 		this.id = id;
 		this.personneFirstName = personneFirstName;
@@ -30,5 +31,6 @@ public class EmpruntDto {
 		this.livreId = livreId;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
+		this.enCours = enCours;
 	}	
 }
