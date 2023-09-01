@@ -35,8 +35,8 @@ public class DataInit {
 	
 	@PostConstruct
 	public void initializeDb() {
-		Livre livre1 = daoLivre.save(new Livre (null, "titre1", "auteur1", "editeur1", true, EtatLivre.BON_ETAT));
-		daoLivre.save(new Livre (null, "titre2", "auteur2", "editeur2", true, EtatLivre.BON_ETAT));
+		Livre livre1 = daoLivre.save(new Livre (null, "titre1", "auteur1", "editeur1", false, EtatLivre.BON_ETAT));
+		Livre livre2 = daoLivre.save(new Livre (null, "titre2", "auteur2", "editeur2", false, EtatLivre.BON_ETAT));
 		daoLivre.save(new Livre (null, "titre3", "auteur3", "editeur3", true, EtatLivre.BON_ETAT));
 		daoLivre.save(new Livre (null, "titre4", "auteur4", "editeur4", true, EtatLivre.BON_ETAT));
 		daoLivre.save(new Livre (null, "titre5", "auteur5", "editeur5", true, EtatLivre.BON_ETAT));
@@ -51,7 +51,7 @@ public class DataInit {
 		
 //		Emprunt emprunt1 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1));
 		daoEmprunt.save(new Emprunt(null, TypeEmprunt.RESERVATION,livre1, personne2));
-		daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne3));
+		daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF, livre2, personne3));
 		
 		personne1.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne1));
 		

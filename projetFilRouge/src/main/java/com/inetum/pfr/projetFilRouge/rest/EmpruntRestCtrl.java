@@ -40,15 +40,21 @@ public class EmpruntRestCtrl {
 	// exemple d'URL: ./api-bibliotheque/emprunt/1
 	// permet de trouver un emprunt avec son ID
 	
+//	@GetMapping("/{empruntId}")
+//	public ResponseEntity<Emprunt> getEmpruntById(@PathVariable("empruntId") Long id) {
+//		Emprunt emprunt = serviceEmprunt.searchById(id);
+//
+//		if (emprunt != null) {
+//			return new ResponseEntity<Emprunt>(emprunt, HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<Emprunt>(HttpStatus.NOT_FOUND);
+//		}
+//	}
+	
 	@GetMapping("/{empruntId}")
-	public ResponseEntity<Emprunt> getEmpruntById(@PathVariable("empruntId") Long id) {
-		Emprunt emprunt = serviceEmprunt.searchById(id);
+	public Emprunt getEmpruntById(@PathVariable("empruntId") Long id) {
+		return serviceEmprunt.searchById(id);
 
-		if (emprunt != null) {
-			return new ResponseEntity<Emprunt>(emprunt, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<Emprunt>(HttpStatus.NOT_FOUND);
-		}
 	}
 	
 	
@@ -57,25 +63,49 @@ public class EmpruntRestCtrl {
 	// appelée en GET:
 	
 	@GetMapping("/emprunter")
-	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId") Long personneId,
-											@RequestParam(value ="livreId") Long livreId) {
-		 Emprunt emprunter =  serviceEmprunt.emprunter(personneId, livreId);
+	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId", required = false) Long personneId ,
+											@RequestParam(value ="livreId", required = false) Long livreId) {
+
 		 
-			if (emprunter != null) {
+			if (personneId != null && livreId != null) {
+				Emprunt emprunter =  serviceEmprunt.emprunter(personneId, livreId);
 				return new ResponseEntity<Emprunt>(emprunter, HttpStatus.OK);
 			} else {
-				return new ResponseEntity<String>("{\"err\" : \"Livre ou Personne non trouvée\"}", HttpStatus.NOT_FOUND);
+				return new ResponseEntity<String>("{\"err\" : \"ID Personne ou ID livre non renseigné\"}", HttpStatus.NOT_FOUND);
 			}
 	}
+	
 	
 	// PROLONGER
 	// exemple d'URL: ./api-bibliotheque/emprunt/prolonger?empruntId=1
 	// appelée en GET:
 	
 	@GetMapping("/prolonger")
-	public void prolonger (@RequestParam(value = "empruntId") Long empruntId) {
-		 serviceEmprunt.prolonger(empruntId);
+	public  ResponseEntity <?> prolonger (@RequestParam(value = "empruntId", required = false) Long empruntId) {
+		
+		if (empruntId != null) {
+			serviceEmprunt.prolonger(empruntId);	
+			return new ResponseEntity<Emprunt>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("{\"err\" : \"ID Emprunt non renseigné\"}", HttpStatus.NOT_FOUND);
+		}
 	}
+	
+	// RETOURNER
+	// exemple d'URL: ./api-bibliotheque/emprunt/retourner?empruntId=1
+	// appelée en GET:
+	
+	@GetMapping("/retourner")
+	public  ResponseEntity <?> retourner (@RequestParam(value = "empruntId", required = false) Long empruntId) {
+		
+		if (empruntId != null) {
+			serviceEmprunt.retourner(empruntId);	
+			return new ResponseEntity<Emprunt>(HttpStatus.OK);
+		} else {
+			return new ResponseEntity<String>("{\"err\" : \"ID Emprunt non renseigné\"}", HttpStatus.NOT_FOUND);
+		}
+	}
+	
 	
 	
 	

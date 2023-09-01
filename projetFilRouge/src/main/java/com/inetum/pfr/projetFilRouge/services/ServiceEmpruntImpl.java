@@ -18,6 +18,7 @@ import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
 import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
+import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 import com.inetum.pfr.projetFilRouge.util.AppUtil;
 
 @Service
@@ -73,11 +74,11 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 				daoEmprunt.save(livreEmprunte);
 				return livreEmprunte;
 			} else {
-				throw new EmpruntException("Disponibilité du livre = " 
-						+ dispoLivre + "\t Nombre d'emprunts maximum du lecteur atteint = " + maxEmprunts);
+				throw new EmpruntException("Emprunt non autorisé // Disponibilité du livre = " 
+						+ dispoLivre + ", Nombre d'emprunts maximum du lecteur atteint = " + maxEmprunts);
 			}
 		} else {
-			throw new EmpruntException("Livre ou emprunteur inexistant");
+			throw new NotFoundException("Livre ou emprunteur inexistant, id livre = " + livreId + " id personne = " + personneId);
 		}
 	}
 	
@@ -85,15 +86,21 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 	public void prolonger(Long empruntId) {
 		
 		Emprunt empruntAProlonger = daoEmprunt.findById(empruntId).orElse(null);
-		Date dateFinEmprunt = empruntAProlonger.getDateFin();
-		Date dateDuJour = new Date();
-		Long joursDeRetard = ChronoUnit.DAYS.between(AppUtil.asLocalDate(dateFinEmprunt), AppUtil.asLocalDate(dateDuJour));
 		
-		if (joursDeRetard <= 7) {
-			empruntAProlonger.setDateFin(AppUtil.ajouterJours(dateFinEmprunt, 7));	
+		if (empruntAProlonger !=null) {
+			Date dateFinEmprunt = empruntAProlonger.getDateFin();
+			Date dateDuJour = new Date();
+			Long joursDeRetard = ChronoUnit.DAYS.between(AppUtil.asLocalDate(dateFinEmprunt), AppUtil.asLocalDate(dateDuJour));
+			
+			if (joursDeRetard <= 7) {
+				empruntAProlonger.setDateFin(AppUtil.ajouterJours(dateFinEmprunt, 7));	
+			} else {
+				throw new EmpruntException("Prolongement de l'emprunt non autorisé car retard de retour au delà de 7 jours, nombre de jours de retard = " + joursDeRetard);
+			};		
 		} else {
-			throw new EmpruntException("Prolongement de l'emprunt non autorisé car retard de retour au delà de 7 jours, nombre de jours de retard = " + joursDeRetard);
-		};		
+			throw new NotFoundException("Emprunt inexistant pour l'id = " + empruntId);
+		}
+		
 	}
 	
 	
@@ -101,11 +108,14 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 	public void retourner(Long empruntId) {
 		
 		Emprunt empruntARetourner = daoEmprunt.findById(empruntId).orElse(null);
-		Livre livreARetourner = empruntARetourner.getLivre();
 		
-		empruntARetourner.setEnCours(false);
-		livreARetourner.setDispo(true);
-		
+		if (empruntARetourner !=null) {
+			Livre livreARetourner = empruntARetourner.getLivre();
+			empruntARetourner.setEnCours(false);
+			livreARetourner.setDispo(true);			
+		} else {
+			throw new NotFoundException("Emprunt inexistant pour l'id = " + empruntId);
+		}
 	}
 	
 	
