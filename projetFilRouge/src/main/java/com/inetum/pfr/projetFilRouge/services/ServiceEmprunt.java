@@ -10,7 +10,8 @@ import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 public interface ServiceEmprunt extends GenericService<Emprunt, Long, EmpruntDto> {
 	
 	//	Méthodes hérités de AbstractGenericService :
-
+	
+	//  List<Emprunt> searchAll()
 	//	<Optional> Emprunt searchById (Long empruntId)
 	//	void removeById (Long emopruntId);
 	//	Emprunt saveOrUpdate (Emprunt emprunt);		
@@ -24,10 +25,11 @@ public interface ServiceEmprunt extends GenericService<Emprunt, Long, EmpruntDto
 	void prolonger(Long empruntId) throws NotFoundException;
 	void retourner(Long empruntId) throws NotFoundException;
 	
-	// NamedQuery
+	//  Méthodes SpringData & NamedQueries
 	
 	Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId) throws NotFoundException;
 	Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId) throws NotFoundException;
+	List <EmpruntDto> searchByPersonneId(Long personneId) throws NotFoundException;
 	List<Emprunt> tousLesRetards();
 	
 

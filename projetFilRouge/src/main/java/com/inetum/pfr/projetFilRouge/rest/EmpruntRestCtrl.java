@@ -28,7 +28,7 @@ public class EmpruntRestCtrl {
 	ServiceEmprunt serviceEmprunt;
 	
 	
-	// READ
+	// READ ALL
 	// URL: ./api-bibliotheque/emprunt
 	
 	@GetMapping("")
@@ -36,25 +36,21 @@ public class EmpruntRestCtrl {
 		return serviceEmprunt.searchAllDto();
 	}
 	
-	
-	// exemple d'URL: ./api-bibliotheque/emprunt/1
-	// permet de trouver un emprunt avec son ID
-	
-//	@GetMapping("/{empruntId}")
-//	public ResponseEntity<Emprunt> getEmpruntById(@PathVariable("empruntId") Long id) {
-//		Emprunt emprunt = serviceEmprunt.searchById(id);
-//
-//		if (emprunt != null) {
-//			return new ResponseEntity<Emprunt>(emprunt, HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<Emprunt>(HttpStatus.NOT_FOUND);
-//		}
-//	}
+	// READ BY EMPRUNT ID
+	// URL: ./api-bibliotheque/emprunt/1
 	
 	@GetMapping("/{empruntId}")
 	public Emprunt getEmpruntById(@PathVariable("empruntId") Long id) {
 		return serviceEmprunt.searchById(id);
 
+	}
+	
+	// READ BY PERSONNE ID
+	// URL: ./api-bibliotheque/emprunt/personne?personneId=2
+	
+	@GetMapping("/personne")
+	public List<EmpruntDto> getEmpruntByPersonneId(@RequestParam(value = "personneId", required = false) Long id) {
+		return serviceEmprunt.searchByPersonneId(id);
 	}
 	
 	
@@ -66,7 +62,6 @@ public class EmpruntRestCtrl {
 	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId", required = false) Long personneId ,
 											@RequestParam(value ="livreId", required = false) Long livreId) {
 
-		 
 			if (personneId != null && livreId != null) {
 				Emprunt emprunter =  serviceEmprunt.emprunter(personneId, livreId);
 				return new ResponseEntity<Emprunt>(emprunter, HttpStatus.OK);

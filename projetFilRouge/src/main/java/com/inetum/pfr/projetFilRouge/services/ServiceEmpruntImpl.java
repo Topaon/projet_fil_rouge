@@ -46,7 +46,7 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 	
 	// CONSTRUCTEUR ----------------
 	
-	public ServiceEmpruntImpl (DaoEmprunt daoEmprunt, DaoPersonne daoPersonne, DaoLivre daoLivre) {
+	public ServiceEmpruntImpl (DaoEmprunt daoEmprunt, DaoPersonne daoPersonne, DaoLivre daoLivre, ServicePersonne servicePersonne) {
 		this.daoEmprunt = daoEmprunt;
 		this.daoLivre = daoLivre;
 		this.daoPersonne = daoPersonne;
@@ -122,6 +122,21 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 		// Méthodes SpringData & NamedQueries
 
 	@Override
+	public List<EmpruntDto> searchByPersonneId(Long personneId) throws NotFoundException {
+		Personne personne = daoPersonne.findById(personneId).orElse(null);
+		
+		if(personne != null) { 
+			List <Emprunt> le =  daoEmprunt.findByPersonneId(personneId);
+			return dtoConverter.empruntToEmpruntDto(le);
+			
+		} else {
+			throw new NotFoundException("Aucune correspondance trouvé pour l'id : " + personneId);
+		}
+		
+		
+	}
+	
+	@Override
 	public Emprunt searchByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId) {
 		return daoEmprunt.findByPersonneIdAndLivreIdAndEnCoursTrue(personneId, livreId);
 		
@@ -131,7 +146,7 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 	public Emprunt searchByPersonneIdAndLivreId(Long personneId, Long livreId) {
 		return daoEmprunt.findByPersonneIdAndLivreId(personneId, livreId);
 	}
-
+	
 	@Override
 	public List<Emprunt> tousLesRetards() {
 		return daoEmprunt.getLateReturn();
@@ -144,4 +159,6 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 		List<Emprunt> le = daoEmprunt.findAll();
 		return dtoConverter.empruntToEmpruntDto(le);
 	}
+
+		
 }
