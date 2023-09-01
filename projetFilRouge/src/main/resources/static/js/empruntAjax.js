@@ -40,9 +40,20 @@ function ajouterEmprunt() {
 
 function prolongerEmprunt() {
 
-	let empruntId = document.getElementById("inputIdEmprunt").value
+	let empruntId = document.getElementById("inputIdEmpruntProlonger").value
 
 	let wsUrl = "./api-bibliotheque/emprunt/prolonger?empruntId=" + empruntId;
+
+	makeAjaxGetRequest(wsUrl, function() {
+		afficherTousLesEmprunts()
+	})
+}
+
+function retournerEmprunt() {
+
+	let empruntId = document.getElementById("inputIdEmpruntRetourner").value
+
+	let wsUrl = "./api-bibliotheque/emprunt/retourner?empruntId=" + empruntId;
 
 	makeAjaxGetRequest(wsUrl, function() {
 		afficherTousLesEmprunts()

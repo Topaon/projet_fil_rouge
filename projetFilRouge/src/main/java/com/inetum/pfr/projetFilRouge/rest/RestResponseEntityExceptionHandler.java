@@ -10,6 +10,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.inetum.pfr.projetFilRouge.exception.ApiError;
+import com.inetum.pfr.projetFilRouge.exception.EmpruntException;
 import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 
 @ControllerAdvice
@@ -28,6 +29,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	@ExceptionHandler(NotFoundException.class)
 	protected ResponseEntity<Object> handleEntityNotFound(NotFoundException ex) {
 		return buildResponseEntity(new ApiError(HttpStatus.NOT_FOUND, ex.getMessage()));
+	}
+	
+	@ExceptionHandler(EmpruntException.class)
+	protected ResponseEntity<Object> handleEmpruntException(EmpruntException ex) {
+		return buildResponseEntity(new ApiError(HttpStatus.OK , ex.getMessage()));
 	}
 	
 	/*
