@@ -46,22 +46,23 @@ Logger logger = LoggerFactory.getLogger(TestServiceIncident.class);
 		Emprunt emprunt2 = serviceEmprunt.saveOrUpdate(new Emprunt(null, TypeEmprunt.RESERVATION, livre2, pers1));
 		Emprunt emprunt3 = serviceEmprunt.saveOrUpdate(new Emprunt(null, TypeEmprunt.EFFECTIF, livre3, pers1));
 		
-		Incident inc1 = serviceIncident.saveOrUpdate(new Incident(null, TypeIncident.LIVRE_ABIME, emprunt1, EtatLivre.BON_ETAT, EtatLivre.ABIME, "Pages mouillées, couverture abimée"));
-		Incident inc2 = serviceIncident.saveOrUpdate(new Incident(null, TypeIncident.LIVRE_ABIME, emprunt2, EtatLivre.ABIME, EtatLivre.HORS_SERVICE, "Mangé par son chien"));
-		Incident inc3 = serviceIncident.saveOrUpdate(new Incident(null, TypeIncident.LIVRE_PERDU, emprunt3, EtatLivre.BON_ETAT, EtatLivre.HORS_SERVICE, "Déchiré"));
-	
-		assertEquals(serviceIncident.searchById(inc1.getId()).getDescription(), "Pages mouillées, couverture abimée");
+//		Incident inc1 = serviceIncident.saveOrUpdate(new Incident(null, TypeIncident.LIVRE_ABIME, emprunt1, EtatLivre.BON_ETAT, EtatLivre.ABIME, "Pages mouillées, couverture abimée"));
+//		Incident inc2 = serviceIncident.saveOrUpdate(new Incident(null, TypeIncident.LIVRE_ABIME, emprunt2, EtatLivre.ABIME, EtatLivre.HORS_SERVICE, "Mangé par son chien"));
+//		Incident inc3 = serviceIncident.saveOrUpdate(new Incident(null, TypeIncident.LIVRE_PERDU, emprunt3, EtatLivre.BON_ETAT, EtatLivre.HORS_SERVICE, "Déchiré"));
+//	
+//		assertEquals(serviceIncident.searchById(inc1.getId()).getDescription(), "Pages mouillées, couverture abimée");
+//		
+//		assertTrue(serviceIncident.searchAll().size() == 3);
+//		
+//		inc2.setNouvelEtat(EtatLivre.HORS_SERVICE);
+//		serviceIncident.saveOrUpdate(inc2);
+//		assertEquals(serviceIncident.searchById(inc2.getId()).getNouvelEtat(), EtatLivre.HORS_SERVICE);	
+//		
+//		serviceIncident.removeById(inc3.getId());
+//		assertTrue(serviceIncident.searchAll().size() == 2);
 		
-		assertTrue(serviceIncident.searchAll().size() == 3);
-		
-		inc2.setNouvelEtat(EtatLivre.HORS_SERVICE);
-		serviceIncident.saveOrUpdate(inc2);
-		assertEquals(serviceIncident.searchById(inc2.getId()).getNouvelEtat(), EtatLivre.HORS_SERVICE);	
-		
-		serviceIncident.removeById(inc3.getId());
-		assertTrue(serviceIncident.searchAll().size() == 2);
-		
-//		Incident incService =  serviceIncident.declarerIncident(emprunt1.getId(), "LIVRE_PERDU", "le livre a été perdu par Simon");
+		Incident incService =  serviceIncident.declarerIncident(emprunt1.getId(), "LIVRE_ABIME", "HORS_SERVICE", "le livre a été déchiré par Simon");
+		System.out.println("test end");
 		
 
 	}

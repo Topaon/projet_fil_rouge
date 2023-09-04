@@ -37,9 +37,10 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 	
 	// CONSTRUCTEUR ----------------
 	
-	public ServiceIncidentImpl (DaoIncident daoIncident, DaoEmprunt daoEmprunt) {
+	public ServiceIncidentImpl (DaoIncident daoIncident, DaoEmprunt daoEmprunt, ServiceEmprunt serviceEmprunt) {
 		this.daoIncident = daoIncident;
 		this.daoEmprunt = daoEmprunt;
+		this.serviceEmprunt = serviceEmprunt;
 	}
 	
 	
@@ -47,27 +48,32 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 	
 			// méthodes métiers
 
-	public Incident declarerIncident(Long empruntId, String typeIncident, String description) throws EmpruntException {
+	public Incident declarerIncident(Long empruntId, String typeIncident, String nouvelEtat, String description) throws EmpruntException {
 		
 		Emprunt emprunt = daoEmprunt.findById(empruntId).orElse(null);
 		TypeIncident typeIncidentEnum = TypeIncident.valueOf(typeIncident);
 		EtatLivre ancienEtat = emprunt.getLivre().getEtat();
+		EtatLivre nouvelEtatEnum = EtatLivre.valueOf(nouvelEtat);
+		
 		Incident incident = null;
 		
-			if (typeIncident == "LIVRE_ABIME") {
+			if (typeIncident.equals("LIVRE_ABIME")) {
+				System.out.println(typeIncident.equals("LIVRE_ABIME"));
 				serviceEmprunt.retourner(empruntId);
-				emprunt.getLivre().setEtat(EtatLivre.ABIME);
-				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, EtatLivre.ABIME, description);
+				emprunt.getLivre().setEtat(nouvelEtatEnum);
+				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, description);
 			} 
 			
-			
-			else if (typeIncident == "LIVRE_PERDU") {
+			else if (typeIncident.equals("LIVRE_PERDU")) {
 				serviceEmprunt.retourner(empruntId);
 				emprunt.getLivre().setEtat(EtatLivre.HORS_SERVICE);
 				emprunt.getLivre().setDispo(false);
-				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, EtatLivre.HORS_SERVICE, description);
-			}
-			return incident;
+				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, description);
+			} 
+		
+		daoIncident.save(incident);
+		return incident;
+		
 	}
 	
 }
