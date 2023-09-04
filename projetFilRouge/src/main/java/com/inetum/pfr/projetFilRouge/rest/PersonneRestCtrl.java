@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
@@ -44,6 +45,15 @@ public class PersonneRestCtrl {
 	public PersonneDto getPersonneById(@PathVariable("PersonneId") Long id) {
 		return servicePersonne.searchDtoById(id);
 	}
+	
+	// READ BY PERSONNE NAME
+	// URL: ./api-bibliotheque/personne/?name=Granier
+	
+	@GetMapping("/")
+	public List<PersonneDto> getPersonneByName(@RequestParam(value = "name", required = false) String nomPersonne) {
+		return servicePersonne.searchByNom(nomPersonne);
+	}
+	
 
 	// CREATE
 	// exemple d'URL: ./api-bibliotheque/personne

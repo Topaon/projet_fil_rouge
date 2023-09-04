@@ -11,10 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.inetum.pfr.projetFilRouge.util.AppUtil;
 
 import lombok.Getter;
@@ -44,7 +44,6 @@ public class Emprunt {
 	@ManyToOne
 	@JoinColumn(name = "livreId")
 	private Livre livre;
-
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut = new Date();

@@ -8,6 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,32 +32,44 @@ public class Incident {
 	private Long id;
 	@Enumerated(EnumType.STRING)
 	private TypeIncident typeIncident;
+	
 	@OneToOne
+	@JoinColumn(name = "empruntId" , unique=true)
 	private Emprunt emprunt;
+	
 	@Enumerated(EnumType.STRING)
 	private EtatLivre ancienEtat;
 	@Enumerated(EnumType.STRING)
 	private EtatLivre nouvelEtat;
+	
 	@Temporal(TemporalType.DATE)
 	private Date dateCreationIncident = new Date();
 	private String description;
 	
-	public Incident(Long id, TypeIncident typeIncident, EtatLivre ancienEtat, EtatLivre nouvelEtat,
-			String description) {
+	public Incident(Long id, TypeIncident typeIncident, Emprunt emprunt, EtatLivre ancienEtat , String description) {
+		super();
+		this.id = id;
+		this.typeIncident = typeIncident;
+		this.ancienEtat = ancienEtat;
+		this.emprunt = emprunt;
+		this.description = description;
+	}
+	
+	
+	public Incident(Long id, TypeIncident typeIncident, Emprunt emprunt, EtatLivre ancienEtat , EtatLivre nouvelEtat, String description) {
 		super();
 		this.id = id;
 		this.typeIncident = typeIncident;
 		this.ancienEtat = ancienEtat;
 		this.nouvelEtat = nouvelEtat;
+		this.emprunt = emprunt;
 		this.description = description;
 	}
 	
-	public Incident(Long id, TypeIncident typeIncident, Emprunt emprunt, EtatLivre ancienEtat, EtatLivre nouvelEtat,
-			String description) {
+	public Incident(Long id, TypeIncident typeIncident, EtatLivre ancienEtat , EtatLivre nouvelEtat, String description) {
 		super();
 		this.id = id;
 		this.typeIncident = typeIncident;
-		this.emprunt = emprunt;
 		this.ancienEtat = ancienEtat;
 		this.nouvelEtat = nouvelEtat;
 		this.description = description;
@@ -65,7 +78,6 @@ public class Incident {
 	
 	@Override
 	public String toString() {
-		return "Incident [id=" + id + ", typeIncident=" + typeIncident + ", ancienEtat=" + ancienEtat + ", nouvelEtat="
-				+ nouvelEtat + ", dateCreationIncident=" + dateCreationIncident + ", description=" + description + "]";
+		return "Incident [id=" + id + ", typeIncident=" + typeIncident + " dateCreationIncident=" + dateCreationIncident + ", description=" + description + "]";
 	}
 }

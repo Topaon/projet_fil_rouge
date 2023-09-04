@@ -25,16 +25,10 @@ import com.inetum.pfr.projetFilRouge.util.AppUtil;
 @Transactional
 public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, EmpruntDto> implements ServiceEmprunt {
 	
-	@Override
-	public Class<EmpruntDto> getDtoClass() {
-		return EmpruntDto.class;
-	}
-
 	
 	// ATTRIBUTS -------------------
 	
 	private DaoEmprunt daoEmprunt;
-	private EmpruntDto dtoEmprunt;
 	private DaoLivre daoLivre;
 	private DaoPersonne daoPersonne;
 	private DtoConverter dtoConverter = new DtoConverter();
@@ -42,6 +36,11 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 		// attributs remonté à la classe mère
 	public CrudRepository<Emprunt, Long> getDao() {
 		return this.daoEmprunt;
+	}
+	
+	@Override
+	public Class<EmpruntDto> getDtoClass() {
+		return EmpruntDto.class;
 	}
 	
 	// CONSTRUCTEUR ----------------

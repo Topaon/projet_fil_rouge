@@ -78,6 +78,8 @@ public class DataInit {
 		Personne personne16 = daoPersonne.save(new Personne(null, "Fournier", "Anne", "anne.fournier@gmail.com", "Grenoble"));
 		Personne personne17 = daoPersonne.save(new Personne(null, "Lopez", "Antoine", "antoine.lopez@hotmail.com", "Aix-en-Provence"));
 		Personne personne18 = daoPersonne.save(new Personne(null, "Girard", "Paul", "paul.girard@yahoo.com", "Toulon"));
+		Personne personne19 = daoPersonne.save(new Personne(null, "Granier", "Laurent", "laurent.granier@sfr.fr", "Fontenay-sous-Bois"));
+		Personne personne20 = daoPersonne.save(new Personne(null, "Granier", "Philipe", "philipe.granier@sfr.fr", "Sceaux"));
 		
 
 		

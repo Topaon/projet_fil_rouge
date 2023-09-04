@@ -9,7 +9,7 @@ import com.inetum.pfr.projetFilRouge.exception.NotFoundException;
 
 public interface DaoEmprunt extends JpaRepository<Emprunt, Long>{
 	List <Emprunt> findByPersonneId(Long personneId) throws NotFoundException;
-	Emprunt findByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId);
-	Emprunt findByPersonneIdAndLivreId(Long personneId, Long livreId) ;	
+	Emprunt findByPersonneIdAndLivreIdAndEnCoursTrue(Long personneId, Long livreId) throws NotFoundException;
+	Emprunt findByPersonneIdAndLivreId(Long personneId, Long livreId) throws NotFoundException;	
 	public List<Emprunt> getLateReturn();
 }

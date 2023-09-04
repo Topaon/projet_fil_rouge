@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.dto.LivreDto;
+import com.inetum.pfr.projetFilRouge.dto.PersonneDto;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.services.ServiceLivre;
 
@@ -42,6 +44,15 @@ public class LivreRestCtrl {
 		return serviceLivre.searchDtoById(id);
 //		return GenericConverter.map(livre, LivreDto.class);
 	}
+	
+	
+	// READ BY PERSONNE NAME
+		// URL: ./api-bibliotheque/livre/?titre=L'Étranger
+		
+		@GetMapping("/")
+		public List<LivreDto> getDtoByTitre(@RequestParam(value = "titre", required = false) String titreLivre) {
+			return serviceLivre.searchByTitre(titreLivre);
+		}
 
 	// CREATE
 	// exemple d'URL: ./api-bibliotheque/livre

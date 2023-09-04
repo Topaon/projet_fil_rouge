@@ -60,5 +60,9 @@ Logger logger = LoggerFactory.getLogger(TestServiceIncident.class);
 		
 		serviceIncident.removeById(inc3.getId());
 		assertTrue(serviceIncident.searchAll().size() == 2);
+		
+//		Incident incService =  serviceIncident.declarerIncident(emprunt1.getId(), "LIVRE_PERDU", "le livre a été perdu par Simon");
+		
+
 	}
 }
