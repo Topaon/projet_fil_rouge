@@ -58,7 +58,7 @@ public class EmpruntRestCtrl {
 	// exemple d'URL: ./api-bibliotheque/emprunt/emprunter?personneId=1&livreId=4
 	// appelée en GET:
 	
-	@PutMapping("/emprunter")
+	@GetMapping("/emprunter")
 	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId", required = false) Long personneId ,
 											@RequestParam(value ="livreId", required = false) Long livreId) {
 
@@ -75,7 +75,7 @@ public class EmpruntRestCtrl {
 	// exemple d'URL: ./api-bibliotheque/emprunt/prolonger?empruntId=1
 	// appelée en GET:
 	
-	@PutMapping("/prolonger")
+	@GetMapping("/prolonger")
 	public  ResponseEntity <?> prolonger (@RequestParam(value = "empruntId", required = false) Long empruntId) {
 		
 		if (empruntId != null) {
@@ -90,7 +90,7 @@ public class EmpruntRestCtrl {
 	// exemple d'URL: ./api-bibliotheque/emprunt/retourner?empruntId=1
 	// appelée en GET:
 	
-	@PutMapping("/retourner")
+	@GetMapping("/retourner")
 	public  ResponseEntity <?> retourner (@RequestParam(value = "empruntId", required = false) Long empruntId) {
 		
 		if (empruntId != null) {

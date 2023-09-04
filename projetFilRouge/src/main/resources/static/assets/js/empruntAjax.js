@@ -59,7 +59,8 @@ function adminAfficherTousLesEmpruntsParPersonId(id) {
 			(row.insertCell(3)).innerHTML = emprunt.livreId;
 			(row.insertCell(4)).innerHTML = emprunt.titre;
 			(row.insertCell(5)).innerHTML = "<button class='btn btn-success' onclick='rendreEmprunt(" + emprunt.id + ")'>Rendre</button>" +
-											"<button class='btn btn-warning' onclick='prolongerEmprunt(" + emprunt.id + ")'>Prolonger</button>"
+											"<button class='btn btn-warning' onclick='prolongerEmprunt(" + emprunt.id + ")'>Prolonger</button>" +
+											"<button class='btn btn-danger' onclick='declarerIncident(" + emprunt.id + ")'>Incident</button>"
 		};
 	})
 }
@@ -71,19 +72,14 @@ function ajouterEmprunt(pId, lId) {
 
 	let wsUrl = "http://localhost:8080/projetFilRouge/api-bibliotheque/emprunt/emprunter?personneId=" + personneId + "&livreId=" + livreId;
 	
-	console.log("emprunt")
-	
 	makeAjaxGetRequest(
 		wsUrl,
 		function(xhrResponseText) {
 			afficherTousLesLivres()
-			let xhrResponseTextJs = JSON.parse(xhrResponseText);
 			console.log("C'est un succès")
-			console.log(xhrResponseTextJs)
+			console.log(xhrResponseText)
 		}, function(xhrResponseTextErr) {
-			let errCallback = JSON.parse(xhrResponseTextErr);
-			console.log("C'est une erreur")
-			console.log(errCallback)
+			alert("Nombre maximum d'emprunt simultané atteint");
 		})
 }
 
@@ -111,4 +107,11 @@ function retournerEmprunt(id) {
 			let errCallback = JSON.parse(xhrResponseTextErr);
 			console.log(errCallback)
 		})
+}
+
+function declarerIncident() {
+	var incident = {
+		"id" : 2
+	}
+	console.log(incident)
 }

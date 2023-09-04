@@ -33,7 +33,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 	
 	@ExceptionHandler(EmpruntException.class)
 	protected ResponseEntity<Object> handleEmpruntException(EmpruntException ex) {
-		return buildResponseEntity(new ApiError(HttpStatus.OK , ex.getMessage()));
+		return buildResponseEntity(new ApiError(HttpStatus.CONFLICT, ex.getMessage()));
 	}
 	
 	/*
