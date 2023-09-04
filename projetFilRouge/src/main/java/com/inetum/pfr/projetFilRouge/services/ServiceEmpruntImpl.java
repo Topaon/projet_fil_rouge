@@ -90,16 +90,16 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 			Date dateFinEmprunt = empruntAProlonger.getDateFin();
 			Date dateDuJour = new Date();
 			Long joursDeRetard = ChronoUnit.DAYS.between(AppUtil.asLocalDate(dateFinEmprunt), AppUtil.asLocalDate(dateDuJour));
+			Long dureEmprunt = ChronoUnit.DAYS.between(AppUtil.asLocalDate(empruntAProlonger.getDateDebut()), AppUtil.asLocalDate(empruntAProlonger.getDateFin()));
 			
-			if (joursDeRetard <= 7) {
+			if (joursDeRetard <= 7 && dureEmprunt == 21) {
 				empruntAProlonger.setDateFin(AppUtil.ajouterJours(dateFinEmprunt, 7));	
 			} else {
-				throw new EmpruntException("Prolongement de l'emprunt non autorisé car retard de retour au delà de 7 jours, nombre de jours de retard = " + joursDeRetard);
+				throw new EmpruntException("Prolongement de l'emprunt non autorisé car retard de retour au delà de 7 jours ou emprunt déjà prolongé. Nombre de jours de retard = " + joursDeRetard);
 			};		
 		} else {
 			throw new NotFoundException("Emprunt inexistant pour l'id = " + empruntId);
 		}
-		
 	}
 	
 	
@@ -110,7 +110,7 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 		
 		if (empruntARetourner !=null) {
 			Livre livreARetourner = empruntARetourner.getLivre();
-			empruntARetourner.setEnCours(false);
+			daoEmprunt.deleteById(empruntARetourner.getId());
 			livreARetourner.setDispo(true);			
 		} else {
 			throw new NotFoundException("Emprunt inexistant pour l'id = " + empruntId);
