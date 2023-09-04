@@ -20,6 +20,7 @@ public class DtoConverter {
 		empruntDto.setDateDebut(entity.getDateDebut());
 		empruntDto.setDateFin(entity.getDateFin());
 		empruntDto.setEnCours(entity.isEnCours());
+		empruntDto.setType(entity.getType());
 		
 		return empruntDto;
 		

@@ -2,10 +2,8 @@ package com.inetum.pfr.projetFilRouge.dto;
 
 import java.util.Date;
 
-import com.inetum.pfr.projetFilRouge.entity.Livre;
-import com.inetum.pfr.projetFilRouge.entity.Personne;
+import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,10 +19,11 @@ public class EmpruntDto {
 	private Date dateDebut;
 	private Date dateFin;
 	private boolean enCours;
+	private TypeEmprunt type;
 	
 	
 	public EmpruntDto(Long id, String personneFirstName, String personneLastName, Long livreId, String titre, Date dateDebut,
-			Date dateFin, boolean enCours) {
+			Date dateFin, boolean enCours, TypeEmprunt type) {
 		super();
 		this.id = id;
 		this.personneFirstName = personneFirstName;
@@ -34,5 +33,6 @@ public class EmpruntDto {
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
 		this.enCours = enCours;
+		this.type = type;
 	}	
 }
