@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoDomaine;
 import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
+import com.inetum.pfr.projetFilRouge.dao.DaoIncident;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.entity.Domaine;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
+import com.inetum.pfr.projetFilRouge.entity.Incident;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
 import com.inetum.pfr.projetFilRouge.entity.Livre;
 import com.inetum.pfr.projetFilRouge.entity.Personne;
@@ -32,6 +34,9 @@ public class DataInit {
 
 	@Autowired
 	DaoPersonne daoPersonne;
+	
+	@Autowired
+	DaoIncident daoIncident;
 	
 	@PostConstruct
 	public void initializeDb() {
@@ -59,10 +64,7 @@ public class DataInit {
 		daoDomaine.save(new Domaine(null, "Aventure", "Ce livre parle d'aventure"));
 		daoDomaine.save(new Domaine(null, "Amour", "Ce livre parle d'amour"));
 		daoDomaine.save(new Domaine(null, "Policier", "Ce livre parle d'enquètes"));
-		
-		Personne personne1 = daoPersonne.save(new Personne(null, "Granier", "Simon", "simon.granier@sfr.fr", "Fontenay-aux-Roses"));
-		Personne personne2 = daoPersonne.save(new Personne(null, "Prosic", "Mathieu", "mathieu.prosic@orange.com", "Neuville-sur-Oise"));
-		Personne personne3 = daoPersonne.save(new Personne(null, "Clément", "Antoine", "antoine.clement@free.fr", "Stockholm"));
+
 		Personne personne4 = daoPersonne.save(new Personne(null, "Martin", "Sophie", "sophie.martin@gmail.com", "Paris"));
 		Personne personne5 = daoPersonne.save(new Personne(null, "Dubois", "Pierre", "pierre.dubois@yahoo.com", "Marseille"));
 		Personne personne6 = daoPersonne.save(new Personne(null, "Lefebvre", "Marie", "marie.lefebvre@hotmail.com", "Lyon"));
@@ -78,17 +80,14 @@ public class DataInit {
 		Personne personne16 = daoPersonne.save(new Personne(null, "Fournier", "Anne", "anne.fournier@gmail.com", "Grenoble"));
 		Personne personne17 = daoPersonne.save(new Personne(null, "Lopez", "Antoine", "antoine.lopez@hotmail.com", "Aix-en-Provence"));
 		Personne personne18 = daoPersonne.save(new Personne(null, "Girard", "Paul", "paul.girard@yahoo.com", "Toulon"));
-		Personne personne19 = daoPersonne.save(new Personne(null, "Granier", "Laurent", "laurent.granier@sfr.fr", "Fontenay-sous-Bois"));
-		Personne personne20 = daoPersonne.save(new Personne(null, "Granier", "Philipe", "philipe.granier@sfr.fr", "Sceaux"));
 		
 
 		
 //		Emprunt emprunt1 = daoEmprunt.insert(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1));
-		daoEmprunt.save(new Emprunt(null, TypeEmprunt.RESERVATION,livre1, personne2));
-		daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF, livre2, personne3));
+		daoEmprunt.save(new Emprunt(null, TypeEmprunt.RESERVATION,livre1, personne4));
+		daoEmprunt.save(new Emprunt(null, TypeEmprunt.EFFECTIF, livre2, personne5));
 		
-		personne1.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne1));
-		
+		personne4.getEmprunts().add(new Emprunt(null, TypeEmprunt.EFFECTIF, livre1, personne4));
 
 	}
 }

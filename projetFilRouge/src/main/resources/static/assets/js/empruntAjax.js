@@ -112,6 +112,8 @@ function prolongerEmprunt(id) {
 		wsUrl,
 		function(xhrResponseText) {
 			adminLoadLoan()
+		}, function(xhrResponseTextErr) {
+			alert("Emprunt déjà prolongé");
 		}
 	)
 }

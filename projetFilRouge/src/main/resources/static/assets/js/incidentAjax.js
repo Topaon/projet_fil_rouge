@@ -13,8 +13,7 @@ function nouvelIncident() {
 	};
 
 	makeAjaxPostRequest(wsUrl, JSON.stringify(incident), function(xhrResponseText) {
-
-		console.log(xhrResponseText);
-
+		alert("Incident pris en compte");
+		window.history.back();
 	})
 }

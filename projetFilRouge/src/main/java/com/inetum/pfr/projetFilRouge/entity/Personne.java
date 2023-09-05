@@ -24,7 +24,7 @@ import lombok.Setter;
 public class Personne {
 	
 	@Transient
-	public static Integer maxEmprunts = 7;
+	public static Integer maxEmprunts = 3;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

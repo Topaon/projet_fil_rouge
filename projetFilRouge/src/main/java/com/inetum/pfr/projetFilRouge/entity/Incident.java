@@ -34,8 +34,12 @@ public class Incident {
 	private TypeIncident typeIncident;
 	
 	@OneToOne
-	@JoinColumn(name = "empruntId" , unique=true)
-	private Emprunt emprunt;
+	@JoinColumn(name = "livreId" , unique=true)
+	private Livre livre;
+	
+	@OneToOne
+	@JoinColumn(name = "personneId" , unique=true)
+	private Personne personne;
 	
 	@Enumerated(EnumType.STRING)
 	private EtatLivre ancienEtat;
@@ -46,32 +50,36 @@ public class Incident {
 	private Date dateCreationIncident = new Date();
 	private String description;
 	
-	public Incident(Long id, TypeIncident typeIncident, Emprunt emprunt, EtatLivre ancienEtat , String description) {
+	public Incident(Long id, TypeIncident typeIncident, Livre livre, Personne personne, EtatLivre ancienEtat , String description) {
 		super();
 		this.id = id;
 		this.typeIncident = typeIncident;
 		this.ancienEtat = ancienEtat;
-		this.emprunt = emprunt;
+		this.livre = livre;
+		this.personne = personne;
 		this.description = description;
 	}
 	
 	
-	public Incident(Long id, TypeIncident typeIncident, Emprunt emprunt, EtatLivre ancienEtat , EtatLivre nouvelEtat, String description) {
+	public Incident(Long id, TypeIncident typeIncident, Livre livre, Personne personne, Emprunt emprunt, EtatLivre ancienEtat , EtatLivre nouvelEtat, String description) {
 		super();
 		this.id = id;
 		this.typeIncident = typeIncident;
 		this.ancienEtat = ancienEtat;
 		this.nouvelEtat = nouvelEtat;
-		this.emprunt = emprunt;
+		this.livre = livre;
+		this.personne = personne;
 		this.description = description;
 	}
 	
-	public Incident(Long id, TypeIncident typeIncident, EtatLivre ancienEtat , EtatLivre nouvelEtat, String description) {
+	public Incident(Long id, TypeIncident typeIncident, Livre livre, Personne personne, EtatLivre ancienEtat , EtatLivre nouvelEtat, String description) {
 		super();
 		this.id = id;
 		this.typeIncident = typeIncident;
 		this.ancienEtat = ancienEtat;
 		this.nouvelEtat = nouvelEtat;
+		this.livre = livre;
+		this.personne = personne;
 		this.description = description;
 	}
 	
