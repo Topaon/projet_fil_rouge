@@ -1,6 +1,5 @@
 package com.inetum.pfr.projetFilRouge.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,10 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -26,8 +22,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-//@NamedQuery(name = "Livre.findLivresOfDomain", query = "SELECT l FROM Livre l LEFT JOIN FETCH l.domaines d WHERE d.id = ?1")
-@NamedQuery(name = "Livre.findWithDomainById", query = "SELECT l FROM Livre l LEFT JOIN FETCH l.domaines d WHERE l.id = ?1")
 
 public class Livre {
 
@@ -49,12 +43,8 @@ public class Livre {
 
 	// POUR GERER LA RELATION AVEC LES DOMAINES PLUS TARD
 
-	@ManyToMany(fetch=FetchType.LAZY)
-		@JoinTable(
-			name = "Livre_Domaine",
-			joinColumns = {@JoinColumn(name = "livreId")},
-			inverseJoinColumns = {@JoinColumn(name = "domaineId")})	
-	private List<Domaine> domaines = new ArrayList <>();
+	@ManyToOne(fetch=FetchType.LAZY)
+	private Domaine domaine;
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="livre")
 	@JsonIgnore
@@ -68,6 +58,17 @@ public class Livre {
 		this.editeur = editeur;
 		this.dispo = dispo;
 		this.etat = etat;
+	}
+	
+	public Livre(Long id, String titre, String auteur, String editeur, Boolean dispo, EtatLivre etat, Domaine domaine) {
+		super();
+		this.id = id;
+		this.titre = titre;
+		this.auteur = auteur;
+		this.editeur = editeur;
+		this.dispo = dispo;
+		this.etat = etat;
+		this.domaine = domaine;
 	}
 	
 

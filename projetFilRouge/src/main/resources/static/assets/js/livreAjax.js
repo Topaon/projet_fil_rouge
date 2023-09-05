@@ -20,14 +20,15 @@ makeAjaxGetRequest(wsUrl,function(responseJson){
 		(row.insertCell(1)).innerHTML = Livre.titre;
 		(row.insertCell(2)).innerHTML = Livre.auteur;
 		(row.insertCell(3)).innerHTML = Livre.editeur;
-		(row.insertCell(4)).innerHTML = Livre.dispo? "Oui" : "Non";
-		(row.insertCell(5)).innerHTML = Livre.etat;
+		(row.insertCell(4)).innerHTML = Livre.domaine;
+		(row.insertCell(5)).innerHTML = Livre.dispo? "Oui" : "Non";
+		(row.insertCell(6)).innerHTML = Livre.etat;
 		if(Livre.dispo){
-			(row.insertCell(6)).innerHTML = 
+			(row.insertCell(7)).innerHTML = 
 			"<button class='btn btn-success' onclick='emprunterLivre(" + Livre.id + ")'>Emprunter</button>"
 			+ "<button class='btn btn-warning' onclick='reserverLivre()'>Réserver</button>";
 		} else {
-			(row.insertCell(6)).innerHTML = 
+			(row.insertCell(7)).innerHTML = 
 			"<button class='btn btn-warning' onclick='reserverLivre()'>Réserver</button>";
 		}
 	};

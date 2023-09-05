@@ -91,7 +91,7 @@ public class LivreRestCtrl {
 	// appelée en remove
 
 	@DeleteMapping("/{livreId}")
-	public ResponseEntity<?> removeCompteById(@PathVariable("livreId") Long id) {
+	public ResponseEntity<?> removeLivreById(@PathVariable("livreId") Long id) {
 		Livre livreRecherche = serviceLivre.searchById(id);
 		if (livreRecherche != null) {
 			serviceLivre.removeById(id);

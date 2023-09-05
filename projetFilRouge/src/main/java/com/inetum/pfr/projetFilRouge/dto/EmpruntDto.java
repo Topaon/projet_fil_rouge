@@ -21,7 +21,6 @@ public class EmpruntDto {
 	private boolean enCours;
 	private TypeEmprunt type;
 	
-	
 	public EmpruntDto(Long id, String personneFirstName, String personneLastName, Long livreId, String titre, Date dateDebut,
 			Date dateFin, boolean enCours, TypeEmprunt type) {
 		super();

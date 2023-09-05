@@ -1,14 +1,9 @@
 package com.inetum.pfr.projetFilRouge.entity;
 
-import java.util.List;
-
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +13,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@NamedQuery(name = "Domaine.findDomaineWithLivresById", query = "SELECT d FROM Domaine d LEFT JOIN FETCH d.livres l WHERE d.id = ?1")
-
 public class Domaine {
 
 	@Id
@@ -29,10 +22,10 @@ public class Domaine {
 	private String nom;
 	private String description;
 
-	// POUR GERER LA RELATION AVEC LES livres PLUS TARD
-
-	@ManyToMany(fetch=FetchType.LAZY, mappedBy="domaines") 
-	private List<Livre> livres;
+//	// POUR GERER LA RELATION AVEC LES livres PLUS TARD
+//
+//	@OneToMany(fetch=FetchType.LAZY, mappedBy="domaines") 
+//	private List<Livre> livres;
 	
 	
 	public Domaine(Long id, String nom, String description) {

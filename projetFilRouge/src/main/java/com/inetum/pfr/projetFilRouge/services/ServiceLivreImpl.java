@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
+import com.inetum.pfr.projetFilRouge.converter.DtoConverter;
 import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dto.LivreDto;
@@ -20,6 +21,7 @@ public class ServiceLivreImpl extends AbstractGenericService<Livre, Long, LivreD
 	// ATTRIBUTS -------------------
 	
 		private DaoLivre daoLivre;
+		private DtoConverter dtoConverter = new DtoConverter();
 		
 			// attributs remonté à la classe mère
 		public CrudRepository<Livre, Long> getDao() {
@@ -50,9 +52,10 @@ public class ServiceLivreImpl extends AbstractGenericService<Livre, Long, LivreD
 		} else {
 			 throw new NotFoundException("Livre inexistant: " + titreLivre);
 		 }
-		
 	}
-	
-	
-	
+
+	public List<LivreDto> searchAllDto() {
+		List<Livre> le = daoLivre.findAll();
+		return dtoConverter.livreToLivreDto(le);
+	}
 }
