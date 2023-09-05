@@ -35,10 +35,26 @@ function makeAjaxPostRequest(url, jsonData, callback, errCallback) {
 	xhr.send(jsonData);
 }
 
+function makeAjaxPostRequestWithoutBody(url, callback, errCallback) {
+	var xhr = new XMLHttpRequest();
+	registerCallbacks(xhr, callback, errCallback);
+	xhr.open("POST", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(null);
+}
+
 function makeAjaxPutRequest(url, jsonData, callback, errCallback) {
 	var xhr = new XMLHttpRequest();
 	registerCallbacks(xhr, callback, errCallback);
 	xhr.open("PUT", url, true);
 	xhr.setRequestHeader("Content-Type", "application/json");
 	xhr.send(jsonData);
+}
+
+function makeAjaxPutRequestWithoutBody(url, callback, errCallback) {
+	var xhr = new XMLHttpRequest();
+	registerCallbacks(xhr, callback, errCallback);
+	xhr.open("PUT", url, true);
+	xhr.setRequestHeader("Content-Type", "application/json");
+	xhr.send(null);
 }

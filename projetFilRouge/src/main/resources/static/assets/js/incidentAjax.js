@@ -12,9 +12,9 @@ function nouvelIncident() {
 		"description" : $("#input_description").val(),
 	};
 
-	makeAjaxPostRequest(wsUrl, incident, function(xhrResponseText) {
+	makeAjaxPostRequest(wsUrl, JSON.stringify(incident), function(xhrResponseText) {
 
 		console.log(xhrResponseText);
-		
+
 	})
 }

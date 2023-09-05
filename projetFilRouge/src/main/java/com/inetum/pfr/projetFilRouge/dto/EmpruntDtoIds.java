@@ -22,5 +22,4 @@ public class EmpruntDtoIds {
 		this.livreId = livreId;
 		
 	}
-
 }

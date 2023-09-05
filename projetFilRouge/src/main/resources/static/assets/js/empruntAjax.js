@@ -86,16 +86,16 @@ function ajouterEmpruntSauvegarde(pId, lId) {
 
 function ajouterEmprunt(pId, lId) {
 
-	let nouvelEmprunt = {
-		"livreId" : lId,
-		"personneId" : pId
+	let emprunt = {
+		livreId : lId,
+		personneId : pId
 	}
 
 	let wsUrl = "http://localhost:8080/projetFilRouge/api-bibliotheque/emprunt/emprunter";
 	
 	makeAjaxPostRequest(
 		wsUrl,
-		nouvelEmprunt,
+		JSON.stringify(emprunt),
 		function(xhrResponseText) {
 			afficherTousLesLivres()
 			console.log("C'est un succès")
@@ -108,7 +108,7 @@ function ajouterEmprunt(pId, lId) {
 function prolongerEmprunt(id) {
 	let wsUrl = "http://localhost:8080/projetFilRouge/api-bibliotheque/emprunt/prolonger?empruntId=" + id;
 
-	makeAjaxGetRequest(
+	makeAjaxPutRequestWithoutBody(
 		wsUrl,
 		function(xhrResponseText) {
 			adminLoadLoan()
@@ -120,7 +120,7 @@ function retournerEmprunt(id) {
 
 	let wsUrl = "http://localhost:8080/projetFilRouge/api-bibliotheque/emprunt/retourner?empruntId=" + id;
 
-	makeAjaxGetRequest(
+	makeAjaxDeleteRequest(
 		wsUrl,
 		function() {
 			adminLoadLoan();
