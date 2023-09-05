@@ -38,6 +38,13 @@ public class IncidentRestCtrl {
 	public Incident addIncident(@RequestBody Incident incident) {
 		return serviceIncident.saveOrUpdate(incident);
 	}
+	
+	@PostMapping("")
+	public IncidentDto addIncidentDto(@RequestBody IncidentDto incidentDto) {
+		return serviceIncident.declarerIncidentDto(incidentDto);
+	}
+	
+	
 		
 	@PutMapping("")
 	public ResponseEntity<?> updateIncident(@RequestBody Incident incident) {

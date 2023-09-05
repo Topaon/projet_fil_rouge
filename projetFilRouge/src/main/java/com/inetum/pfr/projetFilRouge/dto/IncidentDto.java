@@ -8,6 +8,9 @@ import lombok.ToString;
 
 @Getter@Setter@NoArgsConstructor@AllArgsConstructor@ToString
 public class IncidentDto {
-	private String id;
+	private Long id;
+	private Long empruntId;
+	private String typeIncident; 
+	private String nouvelEtat; 
 	private String description;
 }
