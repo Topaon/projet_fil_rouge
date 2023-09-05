@@ -33,19 +33,12 @@ public class IncidentRestCtrl {
 	public IncidentDto getIncidentById(@PathVariable("id") Long id ) {
 		return serviceIncident.searchDtoById(id);
 	}
-	
-//	@PostMapping("")
-//	public Incident addIncident(@RequestBody Incident incident) {
-//		System.out.println(incident);
-//		return serviceIncident.saveOrUpdate(incident);
-//	}
+
 	
 	@PostMapping("")
 	public IncidentDto addIncidentDto(@RequestBody IncidentDto incidentDto) {
-		System.out.println("debut restctrl");
 		return serviceIncident.declarerIncidentDto(incidentDto);
 	}
-	
 	
 		
 	@PutMapping("")

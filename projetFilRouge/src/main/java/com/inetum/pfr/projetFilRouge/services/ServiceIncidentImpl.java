@@ -86,7 +86,6 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 		Incident incident = null;
 		
 			if (incidentDto.getTypeIncident().equals("LIVRE_ABIME")) {
-				System.out.println(incidentDto.getTypeIncident().equals("LIVRE_ABIME"));
 //				serviceEmprunt.retourner(incidentDto.getEmpruntId());
 				emprunt.getLivre().setEtat(nouvelEtatEnum);
 				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, incidentDto.getDescription());
@@ -100,6 +99,7 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 			} 
 		
 		daoIncident.save(incident);
+		incidentDto.setId(incident.getId());
 		return incidentDto;
 		
 	}

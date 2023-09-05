@@ -12,7 +12,6 @@ function nouvelIncident() {
 		"description" : $("#input_description").val(),
 	};
 
-		console.log(incident)
 	makeAjaxPostRequest(wsUrl, JSON.stringify(incident), function(xhrResponseText) {
 
 		console.log(xhrResponseText);
