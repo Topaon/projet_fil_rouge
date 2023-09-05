@@ -23,4 +23,5 @@ public interface ServiceIncident extends GenericService<Incident, Long, Incident
 	// Méthodes métier
 	
 	Incident declarerIncident(Long empruntId, String typeIncident, String nouvelEtat, String description) throws EmpruntException;
+	IncidentDto declarerIncidentDto(IncidentDto incidentDto) throws EmpruntException;
 }

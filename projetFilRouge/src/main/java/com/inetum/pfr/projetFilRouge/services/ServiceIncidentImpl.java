@@ -76,4 +76,32 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 		
 	}
 	
+	public IncidentDto declarerIncidentDto(IncidentDto incidentDto) throws EmpruntException {
+		
+		Emprunt emprunt = daoEmprunt.findById(incidentDto.getEmpruntId()).orElse(null);
+		TypeIncident typeIncidentEnum = TypeIncident.valueOf(incidentDto.getTypeIncident());
+		EtatLivre ancienEtat = emprunt.getLivre().getEtat();
+		EtatLivre nouvelEtatEnum = EtatLivre.valueOf(incidentDto.getNouvelEtat());
+		
+		Incident incident = null;
+		
+			if (incidentDto.getTypeIncident().equals("LIVRE_ABIME")) {
+				System.out.println(incidentDto.getTypeIncident().equals("LIVRE_ABIME"));
+				serviceEmprunt.retourner(emprunt.getId());
+				emprunt.getLivre().setEtat(nouvelEtatEnum);
+				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, incidentDto.getDescription());
+			} 
+			
+			else if (incidentDto.getTypeIncident().equals("LIVRE_PERDU")) {
+				serviceEmprunt.retourner(emprunt.getId());
+				emprunt.getLivre().setEtat(EtatLivre.HORS_SERVICE);
+				emprunt.getLivre().setDispo(false);
+				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, incidentDto.getDescription());
+			} 
+		
+		daoIncident.save(incident);
+		return incidentDto;
+		
+	}
+	
 }
