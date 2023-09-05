@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.pfr.projetFilRouge.converter.DtoConverter;
+import com.inetum.pfr.projetFilRouge.converter.GenericConverter;
 import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
 import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
 import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
+import com.inetum.pfr.projetFilRouge.dto.EmpruntDtoIds;
 import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt.TypeEmprunt;
@@ -80,6 +82,41 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 			throw new NotFoundException("Livre ou emprunteur inexistant, id livre = " + livreId + " id personne = " + personneId);
 		}
 	}
+	
+	
+	@Override
+	public EmpruntDtoIds emprunter(EmpruntDtoIds empruntDtoIds) {
+		
+		if(empruntDtoIds.getLivreId() != null && empruntDtoIds.getPersonneId() != null) {
+			
+			Livre livreAEmprunter = daoLivre.findById(empruntDtoIds.getLivreId()).orElse(null);
+			Personne emprunteur = daoPersonne.findById(empruntDtoIds.getPersonneId()).orElse(null);
+			
+			boolean dispoLivre = livreAEmprunter.getDispo();
+			boolean maxEmprunts = daoPersonne.countLoansById(empruntDtoIds.getPersonneId()).size() >= Personne.maxEmprunts;
+			
+			if (livreAEmprunter!=null && emprunteur!=null) {
+				
+				if (dispoLivre == true && maxEmprunts == false) {
+					Emprunt livreEmprunte = new Emprunt (null, TypeEmprunt.EFFECTIF, livreAEmprunter, emprunteur);
+					livreAEmprunter.setDispo(false);
+					daoEmprunt.save(livreEmprunte);
+					empruntDtoIds.setId(livreEmprunte.getId());
+					return empruntDtoIds;
+				} else {
+					throw new EmpruntException("Emprunt non autorisé // Disponibilité du livre = " 
+							+ dispoLivre + ", Nombre d'emprunts maximum du lecteur atteint = " + maxEmprunts);
+				}
+			} else {
+				throw new NotFoundException("Livre ou emprunteur inexistant, id livre = " + empruntDtoIds.getLivreId() + " id personne = " + empruntDtoIds.getPersonneId());
+			}
+		} else {
+			throw new NotFoundException("ID Personne ou ID livre non renseigné, ID livre = " + empruntDtoIds.getLivreId() + " ID Personne = " + empruntDtoIds.getPersonneId());
+		}
+		
+	}
+	
+	
 	
 	@Override
 	public void prolonger(Long empruntId) {
@@ -158,6 +195,24 @@ public class ServiceEmpruntImpl extends AbstractGenericService<Emprunt, Long, Em
 		List<Emprunt> le = daoEmprunt.findAll();
 		return dtoConverter.empruntToEmpruntDto(le);
 	}
+	
+	
+//	public EmpruntDtoIds saveOrUpdateEmpruntDtoIds(EmpruntDtoIds emprunDtoIds) {
+//		// en entree : EmpruntDtoIds avec .livreId et .personneId
+//		// a transformer en empruntEntity relié à livreEntity si .livreId pas null et  à personneEntity si .personneId pas null
+//		Emprunt empruntEntity = GenericConverter.map(emprunDtoIds, Emprunt.class);
+//		if(emprunDtoIds.getLivreId() !=null && emprunDtoIds.getPersonneId() !=null) {
+//			Livre livreEntity = daoLivre.findById(emprunDtoIds.getLivreId()).get();
+//			Personne personneEntity = daoPersonne.findById(emprunDtoIds.getPersonneId()).get();
+//			empruntEntity.setLivre(livreEntity);
+//			empruntEntity.setPersonne(personneEntity);
+//			
+//		}
+//		daoEmprunt.save(empruntEntity); 
+//		emprunDtoIds.setId(empruntEntity.getId());
+//		return emprunDtoIds; //on retourne le DtoIds sauvegardé
+//		                    //avec la clef primaire autoincrémenté
+//	}
 
 		
 }

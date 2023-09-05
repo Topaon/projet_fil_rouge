@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.inetum.pfr.projetFilRouge.dto.EmpruntDtoIds;
 import com.inetum.pfr.projetFilRouge.dto.EmpruntDto;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.services.ServiceEmprunt;
@@ -58,16 +59,29 @@ public class EmpruntRestCtrl {
 	// exemple d'URL: ./api-bibliotheque/emprunt/emprunter?personneId=1&livreId=4
 	// appelée en GET:
 	
-	@GetMapping("/emprunter")
-	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId", required = false) Long personneId ,
-											@RequestParam(value ="livreId", required = false) Long livreId) {
-
-			if (personneId != null && livreId != null) {
-				Emprunt emprunter =  serviceEmprunt.emprunter(personneId, livreId);
-				return new ResponseEntity<Emprunt>(emprunter, HttpStatus.OK);
-			} else {
-				return new ResponseEntity<String>("{\"err\" : \"ID Personne ou ID livre non renseigné\"}", HttpStatus.NOT_FOUND);
-			}
+//	@GetMapping("/emprunter")
+//	public ResponseEntity <?> emprunter (@RequestParam(value = "personneId", required = false) Long personneId ,
+//											@RequestParam(value ="livreId", required = false) Long livreId) {
+//
+//			if (personneId != null && livreId != null) {
+//				Emprunt emprunter =  serviceEmprunt.emprunter(personneId, livreId);
+//				return new ResponseEntity<Emprunt>(emprunter, HttpStatus.OK);
+//			} else {
+//				return new ResponseEntity<String>("{\"err\" : \"ID Personne ou ID livre non renseigné\"}", HttpStatus.NOT_FOUND);
+//			}
+//	}
+	
+	
+	// CREATE
+			// exemple d'URL: ./api-bibliotheque/emprunt/emprunter
+			// appelée en POST:
+			// {"livreId" : 1 ,"personneId" : 1}
+	
+		
+	@PostMapping("/emprunter")
+	public EmpruntDtoIds postEmprunt (@RequestBody EmpruntDtoIds nouvelEmprunt) {
+		return serviceEmprunt.emprunter(nouvelEmprunt);
+		
 	}
 	
 	
