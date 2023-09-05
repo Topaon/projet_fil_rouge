@@ -87,13 +87,13 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 		
 			if (incidentDto.getTypeIncident().equals("LIVRE_ABIME")) {
 				System.out.println(incidentDto.getTypeIncident().equals("LIVRE_ABIME"));
-				serviceEmprunt.retourner(emprunt.getId());
+//				serviceEmprunt.retourner(incidentDto.getEmpruntId());
 				emprunt.getLivre().setEtat(nouvelEtatEnum);
 				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, incidentDto.getDescription());
 			} 
 			
 			else if (incidentDto.getTypeIncident().equals("LIVRE_PERDU")) {
-				serviceEmprunt.retourner(emprunt.getId());
+//				serviceEmprunt.retourner(incidentDto.getEmpruntId());
 				emprunt.getLivre().setEtat(EtatLivre.HORS_SERVICE);
 				emprunt.getLivre().setDispo(false);
 				incident = new Incident(null, typeIncidentEnum, emprunt, ancienEtat, nouvelEtatEnum, incidentDto.getDescription());

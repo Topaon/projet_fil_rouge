@@ -34,14 +34,15 @@ public class IncidentRestCtrl {
 		return serviceIncident.searchDtoById(id);
 	}
 	
-	@PostMapping("")
-	public Incident addIncident(@RequestBody Incident incident) {
-		System.out.println(incident);
-		return serviceIncident.saveOrUpdate(incident);
-	}
+//	@PostMapping("")
+//	public Incident addIncident(@RequestBody Incident incident) {
+//		System.out.println(incident);
+//		return serviceIncident.saveOrUpdate(incident);
+//	}
 	
 	@PostMapping("")
 	public IncidentDto addIncidentDto(@RequestBody IncidentDto incidentDto) {
+		System.out.println("debut restctrl");
 		return serviceIncident.declarerIncidentDto(incidentDto);
 	}
 	

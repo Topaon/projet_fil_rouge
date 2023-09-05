@@ -6,12 +6,13 @@ function nouvelIncident() {
 	var idEmprunt = urlParams.get('idEmprunt');
 
 	var incident = {
-		"id" : idEmprunt, 
+		"empruntId" : idEmprunt, 
 		"typeIncident" : $("#input_type_incident").val(),
 		"nouvelEtat" : $("#input_nouvel_etat").val(),
 		"description" : $("#input_description").val(),
 	};
 
+		console.log(incident)
 	makeAjaxPostRequest(wsUrl, JSON.stringify(incident), function(xhrResponseText) {
 
 		console.log(xhrResponseText);
