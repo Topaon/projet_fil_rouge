@@ -36,6 +36,7 @@ public class IncidentRestCtrl {
 	
 	@PostMapping("")
 	public Incident addIncident(@RequestBody Incident incident) {
+		System.out.println(incident);
 		return serviceIncident.saveOrUpdate(incident);
 	}
 		

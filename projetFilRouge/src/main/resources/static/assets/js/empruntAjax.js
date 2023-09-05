@@ -51,6 +51,7 @@ function adminAfficherTousLesEmpruntsParPersonId(id) {
 
 		let bodyElt = document.getElementById("tableBody");
 		bodyElt.innerHTML = "";
+		console.log(empruntJs);
 		for (let emprunt of empruntJs) {
 			let row = bodyElt.insertRow(-1);
 			(row.insertCell(0)).innerHTML = emprunt.id;
@@ -65,7 +66,7 @@ function adminAfficherTousLesEmpruntsParPersonId(id) {
 	})
 }
 
-function ajouterEmprunt(pId, lId) {
+function ajouterEmpruntSauvegarde(pId, lId) {
 
 	let personneId = pId
 	let livreId = lId
@@ -74,6 +75,27 @@ function ajouterEmprunt(pId, lId) {
 	
 	makeAjaxGetRequest(
 		wsUrl,
+		function(xhrResponseText) {
+			afficherTousLesLivres()
+			console.log("C'est un succès")
+			console.log(xhrResponseText)
+		}, function(xhrResponseTextErr) {
+			alert("Nombre maximum d'emprunt simultané atteint");
+		})
+}
+
+function ajouterEmprunt(pId, lId) {
+
+	let nouvelEmprunt = {
+		"livreId" : lId,
+		"personneId" : pId
+	}
+
+	let wsUrl = "http://localhost:8080/projetFilRouge/api-bibliotheque/emprunt/emprunter";
+	
+	makeAjaxPostRequest(
+		wsUrl,
+		nouvelEmprunt,
 		function(xhrResponseText) {
 			afficherTousLesLivres()
 			console.log("C'est un succès")
@@ -109,9 +131,6 @@ function retournerEmprunt(id) {
 		})
 }
 
-function declarerIncident() {
-	var incident = {
-		"id" : 2
-	}
-	console.log(incident)
+function declarerIncident(id) {
+	window.location.href = "http://localhost:8080/projetFilRouge/admin/incident.html?idEmprunt=" + id
 }
