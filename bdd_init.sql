@@ -1,0 +1,323 @@
+--------------------------------------------------------
+--  Fichier créé - mercredi-septembre-06-2023   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table DOMAINE
+--------------------------------------------------------
+
+  CREATE TABLE "DOMAINE" 
+   (	"ID" NUMBER(19,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"DESCRIPTION" VARCHAR2(255 CHAR), 
+	"NOM" VARCHAR2(255 CHAR)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table EMPRUNT
+--------------------------------------------------------
+
+  CREATE TABLE "EMPRUNT" 
+   (	"ID" NUMBER(19,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"DATE_DEBUT" DATE, 
+	"DATE_FIN" DATE, 
+	"EN_COURS" NUMBER(1,0), 
+	"TYPE" VARCHAR2(255 CHAR), 
+	"LIVRE_ID" NUMBER(19,0), 
+	"PERSONNE_ID" NUMBER(19,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table INCIDENT
+--------------------------------------------------------
+
+  CREATE TABLE "INCIDENT" 
+   (	"ID" NUMBER(19,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"ANCIEN_ETAT" VARCHAR2(255 CHAR), 
+	"DATE_CREATION_INCIDENT" DATE, 
+	"DESCRIPTION" VARCHAR2(255 CHAR), 
+	"NOUVEL_ETAT" VARCHAR2(255 CHAR), 
+	"TYPE_INCIDENT" VARCHAR2(255 CHAR), 
+	"LIVRE_ID" NUMBER(19,0), 
+	"PERSONNE_ID" NUMBER(19,0)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table LIVRE
+--------------------------------------------------------
+
+  CREATE TABLE "LIVRE" 
+   (	"ID" NUMBER(19,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"AUTEUR" VARCHAR2(255 CHAR), 
+	"DISPO" NUMBER(1,0), 
+	"EDITEUR" VARCHAR2(255 CHAR), 
+	"ETAT" VARCHAR2(255 CHAR), 
+	"TITRE" VARCHAR2(255 CHAR), 
+	"DOMAINE_ID" NUMBER(19,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table LIVRE_DOMAINE
+--------------------------------------------------------
+
+  CREATE TABLE "LIVRE_DOMAINE" 
+   (	"LIVRE_ID" NUMBER(19,0), 
+	"DOMAINE_ID" NUMBER(19,0)
+   ) SEGMENT CREATION DEFERRED 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Table PERSONNE
+--------------------------------------------------------
+
+  CREATE TABLE "PERSONNE" 
+   (	"ID" NUMBER(19,0) GENERATED ALWAYS AS IDENTITY MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 1 CACHE 20 NOORDER  NOCYCLE  NOKEEP  NOSCALE , 
+	"ADRESSE" VARCHAR2(255 CHAR), 
+	"EMAIL" VARCHAR2(255 CHAR), 
+	"NOM" VARCHAR2(255 CHAR), 
+	"PRENOM" VARCHAR2(255 CHAR)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 ID,
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into DOMAINE
+SET DEFINE OFF;
+Insert into DOMAINE (DESCRIPTION,NOM) values ('Ce livre parle d''aventure','Aventure');
+Insert into DOMAINE (DESCRIPTION,NOM) values ('Ce livre parle de choses sérieuses','Classique');
+Insert into DOMAINE (DESCRIPTION,NOM) values ('Ce livre parle d''enquètes','Policier');
+REM INSERTING into EMPRUNT
+SET DEFINE OFF;
+Insert into EMPRUNT (DATE_DEBUT,DATE_FIN,EN_COURS,TYPE,LIVRE_PERSONNE_ID) values (to_date('06/09/23','DD/MM/RR'),to_date('27/09/23','DD/MM/RR'),'1','RESERVATION','1','1');
+Insert into EMPRUNT (DATE_DEBUT,DATE_FIN,EN_COURS,TYPE,LIVRE_PERSONNE_ID) values (to_date('06/09/23','DD/MM/RR'),to_date('27/09/23','DD/MM/RR'),'1','EFFECTIF','2','2');
+REM INSERTING into INCIDENT
+SET DEFINE OFF;
+REM INSERTING into LIVRE
+SET DEFINE OFF;
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Gaston Leroux','0','Le Livre de Poche','BON_ETAT','Le Mystère de la Chambre Jaune','3');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('George Orwell','0','Gallimard','BON_ETAT','1984','2');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Albert Camus','1','Folio','BON_ETAT','L''Étranger','2');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Antoine de Saint-Exupéry','1','Gallimard','BON_ETAT','Le Petit Prince','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('J.K. Rowling','1','Gallimard Jeunesse','BON_ETAT','Harry Potter à l''École des Sorciers','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('J.R.R. Tolkien','1','Christian Bourgois Éditeur','BON_ETAT','Le Seigneur des Anneaux : La Communauté de l''Anneau','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Jane Austen','1','Le Livre de Poche','BON_ETAT','Orgueil et Préjugés','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Alexandre Dumas','1','Le Livre de Poche','BON_ETAT','Le Comte de Monte-Cristo','3');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Patrick Süskind','1','Folio','BON_ETAT','Le Parfum','3');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Isaac Asimov','1','Pocket','BON_ETAT','Fondation','2');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Victor Hugo','1','Le Livre de Poche','BON_ETAT','Les Misérables','2');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('H.G. Wells','1','Folio SF','BON_ETAT','La Guerre des Mondes','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Stendhal','1','Le Livre de Poche','BON_ETAT','Le Rouge et le Noir','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('René Barjavel','1','Pocket','BON_ETAT','La Nuit des temps','2');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('J.R.R. Tolkien','1','Pocket','BON_ETAT','Le Hobbit','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Bernard Werber','1','Le Livre de Poche','BON_ETAT','Les Fourmis','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('William Gibson','1','J''ai lu','BON_ETAT','Neuromancien','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('J.R.R. Tolkien','1','Christian Bourgois Éditeur','BON_ETAT','Le Silmarillion','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Khaled Hosseini','1','10/18','BON_ETAT','Les Cerfs-volants de Kaboul','1');
+Insert into LIVRE (AUTEUR,DISPO,EDITEUR,ETAT,TITRE,DOMAINE_ID) values ('Aldous Huxley','1','Pocket','BON_ETAT','Le Meilleur des Mondes','2');
+REM INSERTING into LIVRE_DOMAINE
+SET DEFINE OFF;
+REM INSERTING into PERSONNE
+SET DEFINE OFF;
+
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Paris', 'sophie.martin@gmail.com', 'Martin', 'Sophie');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Marseille', 'pierre.dubois@yahoo.com', 'Dubois', 'Pierre');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Lyon', 'marie.lefebvre@hotmail.com', 'Lefebvre', 'Marie');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Toulouse', 'isabelle.moreau@gmail.com', 'Moreau', 'Isabelle');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Bordeaux', 'jean.dupont@yahoo.com', 'Dupont', 'Jean');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Nice', 'luc.bernard@gmail.com', 'Bernard', 'Luc');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Strasbourg', 'laura.petit@hotmail.com', 'Petit', 'Laura');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Nantes', 'julien.garcia@gmail.com', 'Garcia', 'Julien');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Montpellier', 'sylvie.thomas@yahoo.com', 'Thomas', 'Sylvie');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Toulon', 'paul.girard@yahoo.com', 'Girard', 'Paul');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Rennes', 'francois.muller@hotmail.com', 'Muller', 'François');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Lille', 'catherine.perrot@gmail.com', 'Perrot', 'Catherine');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Toulon', 'jean.girard@yahoo.com', 'Girard', 'Jean');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Brest', 'philippe.roux@yahoo.com', 'Roux', 'Philippe');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Grenoble', 'anne.fournier@gmail.com', 'Fournier', 'Anne');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Aix-en-Provence', 'antoine.lopez@hotmail.com', 'Lopez', 'Antoine');
+INSERT INTO PERSONNE (ADRESSE, EMAIL, NOM, PRENOM)
+VALUES ('Toulon', 'eric.girard@yahoo.com', 'Girard', 'Eric');
+
+
+--------------------------------------------------------
+--  DDL for Index SYS_C0018677
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C0018677" ON "DOMAINE" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C0018680
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C0018680" ON "EMPRUNT" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C0018682
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C0018682" ON "INCIDENT" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index UK_EIXBASCQCXINC9UYRBUSTYNYB
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "UK_EIXBASCQCXINC9UYRBUSTYNYB" ON "INCIDENT" ("LIVRE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index UK_HBXUI83I6D0M5P0PYVHAUKBNG
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "UK_HBXUI83I6D0M5P0PYVHAUKBNG" ON "INCIDENT" ("PERSONNE_ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C0018684
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C0018684" ON "LIVRE" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C0018686
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C0018686" ON "PERSONNE" ("ID") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  Constraints for Table DOMAINE
+--------------------------------------------------------
+
+  ALTER TABLE "DOMAINE" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "DOMAINE" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table EMPRUNT
+--------------------------------------------------------
+
+  ALTER TABLE "EMPRUNT" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "EMPRUNT" MODIFY ("EN_COURS" NOT NULL ENABLE);
+  ALTER TABLE "EMPRUNT" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table INCIDENT
+--------------------------------------------------------
+
+  ALTER TABLE "INCIDENT" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "INCIDENT" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "INCIDENT" ADD CONSTRAINT "UK_EIXBASCQCXINC9UYRBUSTYNYB" UNIQUE ("LIVRE_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
+  ALTER TABLE "INCIDENT" ADD CONSTRAINT "UK_HBXUI83I6D0M5P0PYVHAUKBNG" UNIQUE ("PERSONNE_ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table LIVRE
+--------------------------------------------------------
+
+  ALTER TABLE "LIVRE" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "LIVRE" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table LIVRE_DOMAINE
+--------------------------------------------------------
+
+  ALTER TABLE "LIVRE_DOMAINE" MODIFY ("LIVRE_ID" NOT NULL ENABLE);
+  ALTER TABLE "LIVRE_DOMAINE" MODIFY ("DOMAINE_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table PERSONNE
+--------------------------------------------------------
+
+  ALTER TABLE "PERSONNE" MODIFY ("ID" NOT NULL ENABLE);
+  ALTER TABLE "PERSONNE" ADD PRIMARY KEY ("ID")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table EMPRUNT
+--------------------------------------------------------
+
+  ALTER TABLE "EMPRUNT" ADD CONSTRAINT "FKJNN7LL8VL64XHMB6779SVT7C" FOREIGN KEY ("LIVRE_ID")
+	  REFERENCES "LIVRE" ("ID") ENABLE;
+  ALTER TABLE "EMPRUNT" ADD CONSTRAINT "FKPS0SEU1XS2X4GBIHNWJJFCPL5" FOREIGN KEY ("PERSONNE_ID")
+	  REFERENCES "PERSONNE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table INCIDENT
+--------------------------------------------------------
+
+  ALTER TABLE "INCIDENT" ADD CONSTRAINT "FKK3P6D451L4MEMKP19BSMHACR5" FOREIGN KEY ("LIVRE_ID")
+	  REFERENCES "LIVRE" ("ID") ENABLE;
+  ALTER TABLE "INCIDENT" ADD CONSTRAINT "FKCLW6UQ9RWB2CNYRFMFI6BSD23" FOREIGN KEY ("PERSONNE_ID")
+	  REFERENCES "PERSONNE" ("ID") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table LIVRE
+--------------------------------------------------------
+
+  ALTER TABLE "LIVRE" ADD CONSTRAINT "FKAD2UG7SDDJFWCK8FUXIXT1FBY" FOREIGN KEY ("DOMAINE_ID")
+	  REFERENCES "DOMAINE" ("ID") ENABLE;
