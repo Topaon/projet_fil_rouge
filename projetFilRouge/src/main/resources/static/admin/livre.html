@@ -83,12 +83,12 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">L. Petit</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>Laura Petit</h6>
               <span>Admin</span>
             </li>
             <li>
@@ -152,7 +152,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="../index.html">
+        <a class="nav-link " href="#">
           <i class="bi bi-book"></i>
           <span>Livres</span>
         </a>
@@ -196,13 +196,6 @@
         </a>
       </li><!-- End Contact Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-login.html">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>Se déconnecter</span>
-        </a>
-      </li><!-- End Login Page Nav -->
-
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -224,22 +217,19 @@
       <div class="row" id="body">
         <div class="col-xl text-center" id="tab_container">
           <div id="filter_container">
-            <input type="text" class="form-control" id="input_livre_id" placeholder="Entrez l'id du livre"/>
+            <input type="text" class="form-control" id="input_livre_search" placeholder="Entrez le titre du livre"/>
             <button class="btn btn-primary" id="btn_livre_search">Recherche</button>
           </div>
           <table border="1" class="table">
             <thead>
-              <tr><th>Id</th><th>Titre</th><th>Auteur</th><th>Editeur</th><th>Disponible</th><th>Etat</th><th>Action</th></tr>
+              <tr><th>Id</th><th>Titre</th><th>Auteur</th><th>Editeur</th><th>Domaine</th><th>Disponible</th><th>Etat</th><th>Action</th></tr>
             </thead>
             <tbody id="tableBody">
               
             </tbody>
           </table>
         </div>
-        <div class="col-xl-1">
-          
-        </div>
-        </div>
+      </div>
     </section>
 
   </main><!-- End #main -->

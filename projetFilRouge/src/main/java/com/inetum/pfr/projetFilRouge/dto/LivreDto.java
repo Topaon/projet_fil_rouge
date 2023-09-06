@@ -16,4 +16,5 @@ public class LivreDto {
 	private String editeur;
 	private Boolean dispo;
 	private EtatLivre etat;
+	private String domaine;
 }

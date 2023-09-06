@@ -1,5 +1,7 @@
 window.onload=function(){
 	afficherTousLesPersonnes();
+	(document.getElementById("btn_lecteur_search"))
+	   .addEventListener("click",chercherLecteur);
 }
 
 function afficherTousLesPersonnes(){	
@@ -77,4 +79,32 @@ function supprimerPersonne() {
 
 function detailPersonne(text){
 	window.location.href = "http://localhost:8080/projetFilRouge/admin/profil-detail.html?id=" + text
+}
+
+function chercherLecteur(){
+	var nom = $("#input_lecteur_nom").val();
+	
+	console.log(nom);
+	
+	let wsUrl = "http://localhost:8080/projetFilRouge/api-bibliotheque/personne/?name=" + nom;
+	
+	console.log(wsUrl);
+	
+	makeAjaxGetRequest(wsUrl,function(responseJson){
+		let PersonnesJs = JSON.parse(responseJson)
+		
+		let bodyElt = document.getElementById("tableBody")
+		bodyElt.innerHTML=""
+		for(let Personne of PersonnesJs){
+		var row = document.createElement("tr");
+		row.id = Personne.id
+		row.innerHTML = 
+			"<td>" + Personne.id + "</td>" +
+			"<td>" + Personne.nom + "</td>" +
+			"<td>" + Personne.prenom + "</td>" +
+			"<td>" + Personne.email + "</td>";
+		row.setAttribute("onclick", "detailPersonne('" + Personne.id + "')")
+		bodyElt.appendChild(row);
+	};
+	})
 }

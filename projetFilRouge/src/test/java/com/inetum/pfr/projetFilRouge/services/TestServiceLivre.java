@@ -41,10 +41,10 @@ Logger logger = LoggerFactory.getLogger(TestDaoLivre.class);
 		
 		assertTrue(serviceDomaine.searchAll().size()== 7);
 
-		livre1.getDomaines().add(sciences);
-		livre1.getDomaines().add(histoire);
-		livre2.getDomaines().add(histoire);
-		livre3.getDomaines().add(informatique);
+		livre1.setDomaine(sciences);
+		livre1.setDomaine(histoire);
+		livre2.setDomaine(histoire);
+		livre3.setDomaine(informatique);
 		
 		serviceLivre.saveOrUpdate(livre1); 
 		serviceLivre.saveOrUpdate(livre2);
