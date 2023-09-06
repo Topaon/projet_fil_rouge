@@ -41,10 +41,10 @@ public class TestDaoLivre {
 		
 		assertTrue(daoDomaine.findAll().size()== 4);
 
-		livre1.getDomaines().add(sciences);
-		livre1.getDomaines().add(histoire);
-		livre2.getDomaines().add(histoire);
-		livre3.getDomaines().add(informatique);
+		livre1.setDomaine(sciences);
+		livre1.setDomaine(histoire);
+		livre2.setDomaine(histoire);
+		livre3.setDomaine(informatique);
 		
 		daoLivre.save(livre1); 
 		daoLivre.save(livre2);

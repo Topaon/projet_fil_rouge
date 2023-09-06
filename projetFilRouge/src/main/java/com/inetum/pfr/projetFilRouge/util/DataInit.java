@@ -74,12 +74,14 @@ public class DataInit {
 		Personne personne10 = daoPersonne.save(new Personne(null, "Petit", "Laura", "laura.petit@hotmail.com", "Strasbourg"));
 		Personne personne11 = daoPersonne.save(new Personne(null, "Garcia", "Julien", "julien.garcia@gmail.com", "Nantes"));
 		Personne personne12 = daoPersonne.save(new Personne(null, "Thomas", "Sylvie", "sylvie.thomas@yahoo.com", "Montpellier"));
+		Personne personne18 = daoPersonne.save(new Personne(null, "Girard", "Paul", "paul.girard@yahoo.com", "Toulon"));
 		Personne personne13 = daoPersonne.save(new Personne(null, "Muller", "François", "francois.muller@hotmail.com", "Rennes"));
 		Personne personne14 = daoPersonne.save(new Personne(null, "Perrot", "Catherine", "catherine.perrot@gmail.com", "Lille"));
+		Personne personne19 = daoPersonne.save(new Personne(null, "Girard", "Jean", "jean.girard@yahoo.com", "Toulon"));
 		Personne personne15 = daoPersonne.save(new Personne(null, "Roux", "Philippe", "philippe.roux@yahoo.com", "Brest"));
 		Personne personne16 = daoPersonne.save(new Personne(null, "Fournier", "Anne", "anne.fournier@gmail.com", "Grenoble"));
 		Personne personne17 = daoPersonne.save(new Personne(null, "Lopez", "Antoine", "antoine.lopez@hotmail.com", "Aix-en-Provence"));
-		Personne personne18 = daoPersonne.save(new Personne(null, "Girard", "Paul", "paul.girard@yahoo.com", "Toulon"));
+		Personne personne20 = daoPersonne.save(new Personne(null, "Girard", "Eric", "eric.girard@yahoo.com", "Toulon"));
 		
 
 		
