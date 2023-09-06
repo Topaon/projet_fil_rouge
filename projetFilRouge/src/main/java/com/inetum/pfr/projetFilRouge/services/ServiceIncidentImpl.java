@@ -2,14 +2,11 @@ package com.inetum.pfr.projetFilRouge.services;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 
 import com.inetum.pfr.projetFilRouge.dao.DaoEmprunt;
 import com.inetum.pfr.projetFilRouge.dao.DaoIncident;
-import com.inetum.pfr.projetFilRouge.dao.DaoLivre;
-import com.inetum.pfr.projetFilRouge.dao.DaoPersonne;
 import com.inetum.pfr.projetFilRouge.dto.IncidentDto;
 import com.inetum.pfr.projetFilRouge.entity.Emprunt;
 import com.inetum.pfr.projetFilRouge.entity.Incident;
@@ -109,7 +106,7 @@ public class ServiceIncidentImpl extends AbstractGenericService<Incident, Long, 
 				emprunt.getLivre().setDispo(false);
 				incident = new Incident(null, typeIncidentEnum, livre, personne, ancienEtat, nouvelEtatEnum, incidentDto.getDescription());
 			} 
-		
+
 		daoIncident.save(incident);
 		incidentDto.setId(incident.getId());
 		return incidentDto;
